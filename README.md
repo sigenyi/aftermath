@@ -1,27 +1,29 @@
 # AFTERMATH
 
-A cinematic, Terminator-inspired explorer of **full job automation**. Enter an occupation, confirm its tasks, and explore the discoveries and development required for the complete workflow to run autonomously.
+A cinematic, Terminator-inspired explorer of **full job automation**. A dark, full-screen scene and one search bar lead directly to an occupation’s possible automation timeline.
 
-This is a working browser prototype with original branding and artwork. It is not affiliated with the Terminator franchise. Its dates are **speculative scenarios based on authored assumptions**, not validated forecasts, source-derived predictions, or individual layoff estimates.
+This is a working browser prototype with original branding and a generated photorealistic endoskeleton image. It is not affiliated with the Terminator franchise. Its dates are **speculative scenarios based on authored assumptions**, not validated forecasts, source-derived predictions, or individual layoff estimates.
 
 ## What is implemented
 
-- A responsive occupation scanner and a searchable-by-title starter catalog of 12 occupations and 49 tasks.
-- Task editing, adding and removal, plus reference-location selection.
+- A simplified cinematic homepage with one search field and the locally served `dist/assets/endoskeleton-cinema.webp` backdrop.
+- Live occupation suggestions as you type, matching titles and aliases from a starter catalog of 12 occupations and 49 tasks.
+- An accessible combobox: arrow-key navigation, Enter to choose, Escape to dismiss, visible focus, and screen-reader announcements. Suggestions adapt to available viewport space.
+- Immediate results for a known occupation. There is no mandatory task-confirmation step.
+- Optional task editing, adding, and removal. Unfamiliar or hybrid roles ask for their actual tasks before showing a broad estimate.
 - A technology dependency model: some occupations use one discovery front, while others require several fronts to converge.
 - Full-automation horizons for every selected workflow, including broad, open-ended assumptions for custom work.
-- Accelerated, central, and conservative scenarios that change the modeled dates.
-- Report sections for technology fronts, tasks, scenario assumptions, and evidence limits.
-- A downloadable plain-text report containing the model assumptions and references.
-- Keyboard-operable report tabs, a modal analysis flow, and reduced-motion styling.
+- Three scenario controls labeled **Faster**, **Baseline**, and **Slower**.
+- Two result tabs—**What needs to happen** and **The tasks**—with **Sources & assumptions** collapsed until requested.
+- A downloadable plain-text report, an optional **How it works** dialog, and reduced-motion support.
 
-There is no live AI service, evidence retrieval, database, account system, or custom-task classifier. Known titles resolve against local aliases. Unfamiliar or hybrid roles ask for their actual tasks; those tasks use a generic scenario until someone maps their requirements.
+There is no live AI service, evidence retrieval, database, account system, location selector, or custom-task classifier. Known titles resolve against local aliases. Unknown work uses a generic scenario until someone maps its requirements. The generated artwork is a static project asset; viewing or using the website does not call an image-generation service.
 
 ## Hosting
 
 The public site is deployed from this repository to GitHub Pages: https://sigenyi.github.io/aftermath/
 
-Pushing to `main` runs the syntax checks and model tests, then publishes only `dist/`. The website has no OpenAI runtime, authentication, API, or hosting dependency. The previous Sites configuration has been removed from this checkout; removal of the old hosted project is a separate provider-side operation.
+Pushing to `main` runs the syntax checks, model tests, and search tests, then publishes only `dist/`. The website has no OpenAI runtime, authentication, API, or hosting dependency. The previous Sites configuration has been removed from this checkout; removal of the old hosted project is a separate provider-side operation.
 
 ## Run locally
 
@@ -46,7 +48,9 @@ npm test
 npm run check
 ```
 
-The tests cover source IDs, title matching, generic custom scenarios, task selection, monotonic scenario changes, single-front versus multi-front dependencies, and the bottleneck calculation. Syntax checks validate the two JavaScript modules.
+The model tests cover source IDs, title matching, generic custom scenarios, task selection, Unicode-safe deduplication, monotonic scenario changes, single-front versus multi-front dependencies, and the bottleneck calculation. `search.test.mjs` covers autocomplete prefixes, aliases, normalization, result limits, uniqueness, and unknown inputs. Syntax checks validate all three JavaScript modules.
+
+Run just the autocomplete tests with `node --test search.test.mjs`.
 
 ## Architecture
 
@@ -54,15 +58,20 @@ The deployable site is the `dist/` directory, which contains authored static fil
 
 | File | Responsibility |
 | --- | --- |
-| `dist/index.html` | Landing page, forms, and dialog containers |
+| `dist/index.html` | Single-screen search experience and dialog containers |
 | `dist/styles.css` | Responsive visual design, interaction states, and motion preferences |
-| `dist/app.js` | Browser state, task editor, report views, scenario selection, and export |
+| `dist/app.js` | Accessible autocomplete, browser state, task editor, report views, scenario selection, and export |
+| `dist/search.js` | Pure title/alias ranking and exact-match checks for suggestions |
 | `dist/engine.js` | Occupations, task mapping, source metadata, assumptions, and pure report calculations |
-| `dist/assets/` | Original visual assets and favicon |
+| `dist/assets/endoskeleton-cinema.webp` | Generated photorealistic cinematic backdrop, served locally |
+| `dist/assets/favicon.svg` | Site favicon |
 | `engine.test.mjs` | Node-based model tests |
+| `search.test.mjs` | Node-based autocomplete tests |
 | `.github/workflows/pages.yml` | GitHub Pages deployment from the repository |
 
-`resolveRole(input)` returns a title match, a possible match requiring confirmation, or a request for task details. `buildReport({title, tasks, scenario, location})` creates the report without network access. Changing a known task's wording invalidates its original mapping; the edited task receives a generic scenario rather than silently retaining unrelated assumptions.
+`searchOccupations(query)` ranks catalog titles and aliases, preferring exact and prefix matches. The UI presents up to six choices, including a custom-work option when appropriate. Selecting a known occupation or submitting an exact title opens its report immediately. Other input opens the task editor instead of forcing a catalog match.
+
+`resolveRole(input)` and `buildReport({title, tasks, scenario, location})` run without network access. The current UI uses U.S. task references and does not offer location selection. Changing a known task’s wording invalidates its original mapping; the edited task receives a generic scenario rather than silently retaining unrelated assumptions.
 
 ## How the speculative model works
 
@@ -84,15 +93,15 @@ Minimum and maximum endpoints are computed separately. The model does **not** ad
 
 | Scenario | Multiplier applied to task-front ranges and integration |
 | --- | ---: |
-| Accelerated | 0.55 |
-| Central | 1.00 |
-| Conservative | 1.75 |
+| Faster (accelerated) | 0.55 |
+| Baseline (central) | 1.00 |
+| Slower (conservative) | 1.75 |
 
 Custom or edited tasks use a generic 20–100+ year technical baseline. With the central integration allowance, a wholly unclassified workflow receives a 25–115+ year horizon. The `+` means the upper end is open; it is not a maximum, confidence interval, or assurance that the necessary discoveries will occur.
 
-The UI shows the basis of each calculation. Sources support occupational descriptions and general research context; **none validate these dates, multipliers, or difficulty factors**. The model currently assumes that discoveries eventually occur. It does not estimate the probability of success, correlations between discoveries, or the risk that a capability is never achieved.
+The result keeps a short uncertainty note beside the dates and puts further explanation in the collapsed **Sources & assumptions** section. The complete numeric assumptions remain visible in `dist/engine.js`. Sources support occupational descriptions and general research context; **none validate these dates, multipliers, or difficulty factors**. The model currently assumes that discoveries eventually occur. It does not estimate the probability of success, correlations between discoveries, or the risk that a capability is never achieved.
 
-Deployment conditions appear separately from technical discoveries: affordable operation, data and hardware access, permissions, liability arrangements, and acceptance. They are assumed satisfied for the scenario rather than independently dated. Selecting a non-U.S. location records context and displays a limitation; it does not currently change the calculation.
+Deployment conditions—affordable operation, data and hardware access, permissions, liability arrangements, and acceptance—are assumed satisfied rather than independently dated. The current interface uses U.S. references throughout. The engine retains a location parameter for future development, but changing it does not adjust the modeled dates.
 
 ## Add or improve an occupation
 
@@ -101,8 +110,8 @@ Deployment conditions appear separately from technical discoveries: affordable o
 3. Add a `[minimumYears, maximumYears]` baseline for every task to `horizonAssumptions`, keeping the same task order.
 4. Add the required front IDs for every task to `frontierMap`, again preserving order. Add a front definition and difficulty assumption if a new capability is needed.
 5. Review the generated complete-automation calculation and verify that source references are not presented as evidence for the authored years.
-6. Add an occupation icon in `dist/app.js` and include the ID in its `physical` set if it belongs in the physical/on-site filter.
-7. Update catalog-count expectations in the tests and run both test and syntax-check commands.
+6. Include useful everyday aliases. The autocomplete reads the catalog directly; no separate card, icon, or filter entry is needed.
+7. Update catalog-count expectations and add representative search tests, then run both test and syntax-check commands.
 
 Task IDs currently include their position in the occupation. Preserve order when possible; a production catalog should use permanent semantic task IDs and explicit data migrations.
 
