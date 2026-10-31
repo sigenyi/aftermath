@@ -148,7 +148,7 @@ The user correctly identified false robotic requirements for Web Developers and 
 - [x] Acquire granular published milestone forecasts and distinguish expert elicitation from observed performance.
 - [x] Replace the universal unknown-year shortcut; unknown requirements must remain visible without inventing a shared technological breakthrough.
 - [x] Recalculate every catalog record, compare distributions and examples, and publish the actual change in coverage and evidence basis.
-- [ ] Verify the live site and update this log through deployment.
+- [x] Verify the live site and update this log through deployment.
 
 Scientific requirement: stronger empirical grounding must not be relabeled as demonstrated whole-job prediction accuracy. Calibration claims will specify the observed outcome tested, held-out data, error metrics, and limits of transfer to work outside that domain.
 
@@ -187,3 +187,12 @@ Scientific requirement: stronger empirical grounding must not be relabeled as de
 ### Remaining research limits after revision 2
 
 The statistical fit is evaluated on software benchmarks only. The occupational model uses historical expert beliefs, provisional task analogies and an explicitly assumed dependence model. Current demonstrations provide readiness context; they are not silently treated as a calibrated Bayesian update to future completion dates. Most profiles still have unsupported requirements. The release does not claim that every cited paper was independently read, every possible breakthrough was enumerated, or any occupation's exact future completion date was validated. Next scientific work requires adjudicating task mappings, obtaining outcome-specific reliability/cost evidence, testing elicitation forecasts against observed milestones and gathering direct forecasts for presently unsupported requirements.
+
+### Revision 2 milestone — Published and live-verified
+
+- Published revision `921da9a993bf3da5a606169426b5eff3375e076c` to the existing public GitHub repository.
+- [GitHub Pages deployment](https://github.com/sigenyi/aftermath/actions/runs/41242567164) succeeded, including all 81 tests and the complete catalog rebuild.
+- Verified the [public website](https://sigenyi.github.io/aftermath/) in a fresh browser tab. Web Developers has 29 requirements and three relevant technology areas: digital work, independent judgment and communication. No robotic hands, mobility, or physical machinery are assigned. Its partial projection is 2035, with the remaining gap disclosed.
+- Verified the red year, source-backed disclosures, and cinematic reveal on the deployed page; no browser warnings or errors appeared. Saved a live screenshot with the user-facing outputs.
+- Downloaded and inspected the generated Web Developers report: version2.0.0, six distinct milestone events, dependence assumptions/sensitivity, all duties, source links, attribution and limits are present.
+- The new public release remains on GitHub Pages. Research and numerical-model limitations remain as recorded above. This verification establishes deployment and behavior, not future forecast accuracy.
