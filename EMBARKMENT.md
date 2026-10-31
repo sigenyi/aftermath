@@ -49,7 +49,7 @@ The displayed year is a conditional model estimate, not a measured date, calibra
 - [x] Replace the preset forecast engine.
 - [x] Add the cinematic result reveal and red baseline year.
 - [x] Validate catalog-wide outputs and representative interactions.
-- [ ] Publish and document remaining research limitations.
+- [x] Publish and document remaining research limitations.
 
 ### Milestone 1 — Catalog acquisition underway
 
@@ -119,3 +119,12 @@ The displayed year is a conditional model estimate, not a measured date, calibra
 ## Remaining scientific work
 
 This release completes the catalog/interface expansion, not universal scientific forecast validation. Future work needs independent task-label review, measured capability trajectories, explicit cost/reliability thresholds, expert elicitation, and prospective calibration against observed milestones. The existing numerical dates remain authored conditional assumptions. Neither all possible jobs nor all future inventions can be exhaustively enumerated or dated by this release.
+
+### Milestone 8 — Published and verified
+
+- Published application revision `e85b04237c4c269b889e58e2e456c39e9efba562` to the public [GitHub repository](https://github.com/sigenyi/aftermath).
+- [GitHub Pages deployment](https://github.com/sigenyi/aftermath/actions/runs/41175028145) completed successfully, including catalog rebuild, all tests, artifact upload, and deployment.
+- Verified the [public website](https://sigenyi.github.io/aftermath/) loads all 4,491 records and returns live suggestions for occupations beyond the former presets.
+- Verified a complete librarian result after the cinematic reveal on the deployed site, including its full requirements, red central year, multiple technology areas, and explicit unresolved-input count. No browser warning or error messages appeared.
+- Saved a live report screenshot with the user-facing outputs. Closed the local preview and recorded the deployment outcome here.
+- This documentation update changes no application behavior. The research limitations above remain in effect; deployment success does not validate prediction accuracy.
