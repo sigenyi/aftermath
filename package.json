@@ -1,0 +1,1 @@
+{"name":"aftermath","version":"0.2.0","private":true,"type":"module","description":"Full-automation scenario explorer with a cinematic machine-intelligence interface","scripts":{"start":"python3 -m http.server 4173 --directory dist","test":"node engine.test.mjs","check":"node --check dist/app.js && node --check dist/engine.js"}}

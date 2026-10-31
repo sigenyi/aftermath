@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="750" viewBox="0 0 700 750" fill="none" role="img" aria-label="An original dark titanium machine sentinel with a glowing red optical sensor">
+  <defs>
+    <linearGradient id="skull" x1="215" y1="136" x2="464" y2="401" gradientUnits="userSpaceOnUse"><stop stop-color="#101113"/><stop offset=".3" stop-color="#626467"/><stop offset=".46" stop-color="#222427"/><stop offset=".72" stop-color="#111215"/><stop offset="1" stop-color="#030405"/></linearGradient>
+    <linearGradient id="forehead" x1="279" y1="137" x2="400" y2="321" gradientUnits="userSpaceOnUse"><stop stop-color="#85888a"/><stop offset=".26" stop-color="#3c3f42"/><stop offset=".51" stop-color="#25272a"/><stop offset=".85" stop-color="#111215"/><stop offset="1" stop-color="#08090a"/></linearGradient>
+    <linearGradient id="bright" x1="208" y1="300" x2="476" y2="423" gradientUnits="userSpaceOnUse"><stop stop-color="#2a2c2f"/><stop offset=".18" stop-color="#a5a8a9"/><stop offset=".3" stop-color="#44484a"/><stop offset=".53" stop-color="#0c0e0f"/><stop offset=".76" stop-color="#55595b"/><stop offset="1" stop-color="#111314"/></linearGradient>
+    <linearGradient id="metal" x1="238" y1="400" x2="426" y2="516" gradientUnits="userSpaceOnUse"><stop stop-color="#a4a6a5"/><stop offset=".13" stop-color="#55585a"/><stop offset=".35" stop-color="#1a1d1f"/><stop offset=".57" stop-color="#676a6a"/><stop offset=".75" stop-color="#292d2e"/><stop offset="1" stop-color="#080a0b"/></linearGradient>
+    <linearGradient id="jaw" x1="264" y1="453" x2="417" y2="577" gradientUnits="userSpaceOnUse"><stop stop-color="#7b7e7e"/><stop offset=".23" stop-color="#323637"/><stop offset=".48" stop-color="#0f1214"/><stop offset=".66" stop-color="#424748"/><stop offset="1" stop-color="#080a0b"/></linearGradient>
+    <linearGradient id="side" x1="227" y1="306" x2="291" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#606364"/><stop offset=".35" stop-color="#1c2022"/><stop offset=".7" stop-color="#393d3f"/><stop offset="1" stop-color="#050708"/></linearGradient>
+    <linearGradient id="redEdge" x1="384" y1="330" x2="493" y2="333" gradientUnits="userSpaceOnUse"><stop stop-color="#e74235" stop-opacity="0"/><stop offset=".62" stop-color="#ad3228" stop-opacity=".22"/><stop offset="1" stop-color="#fa5540"/></linearGradient>
+    <linearGradient id="neck" x1="284" y1="566" x2="417" y2="566" gradientUnits="userSpaceOnUse"><stop stop-color="#07090b"/><stop offset=".21" stop-color="#323638"/><stop offset=".29" stop-color="#9a9b97"/><stop offset=".37" stop-color="#282e30"/><stop offset=".6" stop-color="#0b0e10"/><stop offset=".81" stop-color="#303638"/><stop offset="1" stop-color="#07090a"/></linearGradient>
+    <linearGradient id="piston" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#12181a"/><stop offset=".26" stop-color="#7b8282"/><stop offset=".35" stop-color="#c5c8c5"/><stop offset=".46" stop-color="#404a4b"/><stop offset=".7" stop-color="#101719"/><stop offset="1" stop-color="#070a0c"/></linearGradient>
+    <linearGradient id="shoulder" x1="175" y1="621" x2="474" y2="745" gradientUnits="userSpaceOnUse"><stop stop-color="#51585a"/><stop offset=".22" stop-color="#181e21"/><stop offset=".48" stop-color="#080d0f"/><stop offset=".78" stop-color="#242c2f"/><stop offset="1" stop-color="#050708"/></linearGradient>
+    <linearGradient id="fade" x1="350" y1="514" x2="350" y2="750" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset=".55" stop-color="white"/><stop offset="1" stop-color="black"/></linearGradient>
+    <radialGradient id="redAura"><stop stop-color="#f93e25" stop-opacity=".21"/><stop offset=".43" stop-color="#991a11" stop-opacity=".08"/><stop offset="1" stop-color="#911710" stop-opacity="0"/></radialGradient>
+    <radialGradient id="iris"><stop stop-color="#fff1c1"/><stop offset=".14" stop-color="#fff5ce"/><stop offset=".35" stop-color="#ff6546"/><stop offset=".59" stop-color="#c11e13"/><stop offset=".72" stop-color="#ff3e27"/><stop offset=".84" stop-color="#6f120c"/><stop offset="1" stop-color="#170402"/></radialGradient>
+    <radialGradient id="bolt"><stop stop-color="#0a0d0f"/><stop offset=".35" stop-color="#0a0c0d"/><stop offset=".45" stop-color="#64696a"/><stop offset=".6" stop-color="#33393a"/><stop offset=".87" stop-color="#111516"/><stop offset="1" stop-color="#686e6f"/></radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="fineGlow"><feGaussianBlur stdDeviation="2"/></filter>
+    <mask id="bodyFade"><rect width="700" height="750" fill="url(#fade)"/></mask>
+    <g id="boltShape"><circle r="8" fill="url(#bolt)"/><path d="m-2-2 4 4m0-4-4 4" stroke="#090c0d" stroke-width="1.5"/></g>
+    <g id="tooth"><path d="M0 0 2-5 12-5 14 0 12 19 3 19Z" fill="url(#metal)" stroke="#080b0c" stroke-width="2"/><path d="M3-2 4 14" stroke="#a2a7a4" stroke-opacity=".46"/></g>
+  </defs>
+  <ellipse cx="407" cy="353" rx="268" ry="315" fill="url(#redAura)"/>
+  <g mask="url(#bodyFade)">
+    <!-- Load-bearing spine, reinforced trapezius and clavicles. -->
+    <path d="m281 531-8 69-58 12-79 30-58 58-10 50h572l-14-50-58-58-79-30-68-12-8-69Z" fill="#030608"/>
+    <path d="m270 587-46 22-93 41-28 47 25 14 61-44 79-17 37-25Z" fill="url(#shoulder)" stroke="#333b3e"/>
+    <path d="m428 587 46 22 93 41 28 47-25 14-61-44-79-17-37-25Z" fill="url(#shoulder)" stroke="#272c2e"/>
+    <path d="m284 539 5 84 32 40h57l35-43 3-81Z" fill="url(#neck)" stroke="#3f4545"/>
+    <path d="m305 553 8 67 25 22h25l23-23 8-66" stroke="#060a0c" stroke-width="17"/>
+    <path d="m308 558 6 61 25 19h22l22-20 8-61" stroke="#535a58" stroke-width="3"/>
+    <path d="m320 548 3 65 15 12h22l16-14 5-64" stroke="#0c1214" stroke-width="15"/>
+    <path d="M331 550v57m13-57v63m14-63v63m13-63v57" stroke="#717974" stroke-width="3"/>
+    <path d="M321 565h58m-57 10h56m-55 11h54m-53 11h52" stroke="#111719" stroke-width="5"/>
+    <g transform="rotate(15 270 579)"><rect x="259" y="527" width="23" height="101" rx="8" fill="#080d0f" stroke="#5a6260"/><rect x="264" y="509" width="13" height="100" rx="4" fill="url(#piston)"/><rect x="258" y="594" width="26" height="23" rx="3" fill="url(#neck)" stroke="#4b5252"/><path d="M260 600h22m-22 6h22" stroke="#050a0d" stroke-width="2"/></g>
+    <g transform="rotate(-15 430 579)"><rect x="419" y="527" width="23" height="101" rx="8" fill="#080d0f" stroke="#55544c"/><rect x="424" y="509" width="13" height="100" rx="4" fill="url(#piston)"/><rect x="418" y="594" width="26" height="23" rx="3" fill="url(#neck)" stroke="#57524b"/><path d="M420 600h22m-22 6h22" stroke="#050a0d" stroke-width="2"/></g>
+    <path d="m232 629 64 22 34 34-17 32-42-19-67-17-60 36-24-22 44-43Z" fill="url(#shoulder)" stroke="#41484a"/>
+    <path d="m468 629-64 22-34 34 17 32 42-19 67-17 60 36 24-22-44-43Z" fill="url(#shoulder)" stroke="#292f31"/>
+    <path d="m210 646 68 18 28 28m184-46-68 18-28 28" stroke="#7b817c" stroke-opacity=".38" stroke-width="3"/>
+    <path d="m153 672 35-21 52 4m307 17-35-21-52 4" stroke="#0a0f11" stroke-width="7"/>
+    <path d="M338 663h24l15 25-11 62h-33l-10-62Z" fill="url(#neck)" stroke="#3b4242"/>
+    <path d="M337 685h25m-26 12h26m-26 12h26m-26 12h26" stroke="#04080a" stroke-width="6"/>
+    <use href="#boltShape" x="236" y="649"/><use href="#boltShape" x="464" y="649"/><use href="#boltShape" x="279" y="675"/><use href="#boltShape" x="421" y="675"/>
+    <!-- The recessed mechanical head silhouette. -->
+    <path d="M350 113c-69 0-119 35-139 95-8 25-9 62-6 96l-8 36 15 88 22 25 13 56 47 52 37 20h37l39-20 47-52 13-56 22-25 15-88-8-36c3-34 2-71-6-96-20-60-70-95-140-95Z" fill="#040608" stroke="#282d2f" stroke-width="2"/>
+    <path d="M350 120c-64 0-112 33-132 89-12 34-9 63-6 96l26 28 36-12 75-7 77 7 36 12 26-28c3-33 6-62-6-96-20-56-68-89-132-89Z" fill="url(#skull)" stroke="#676b6a" stroke-opacity=".44"/>
+    <path d="M351 127c-40 0-72 14-97 43l17 81 24 27 25 10 30-7 29 7 26-10 24-27 17-81c-24-29-57-43-95-43Z" fill="url(#forehead)" stroke="#818582" stroke-opacity=".35"/>
+    <path d="m255 170 30-24 32-10m38-7 44 9 31 16" stroke="#b5b8b4" stroke-opacity=".35" stroke-width="2"/>
+    <path d="M350 129v150" stroke="#0b0e10" stroke-width="3"/><path d="M353 134v140" stroke="#92968f" stroke-opacity=".17"/>
+    <path d="m271 181 16 52 14 12m125-64-16 52-14 12" stroke="#171b1d" stroke-width="3"/>
+    <path d="m284 174 16 51 17 18m99-69-16 51-17 18" stroke="#686e68" stroke-opacity=".19"/>
+    <path d="M232 200c-15 31-15 65-11 91l22 17 18-14-11-46-8-54Z" fill="url(#side)" stroke="#535c5d" stroke-opacity=".48"/>
+    <path d="M468 200c15 31 15 65 11 91l-22 17-18-14 11-46 8-54Z" fill="#15191b" stroke="#5f463f" stroke-opacity=".6"/>
+    <path d="m227 224 11-14 6 44-8 29-10-10Z" fill="#0c1013"/><path d="m473 224-11-14-6 44 8 29 10-10Z" fill="#090d10"/>
+    <path d="m230 233 3 24m236-24-3 24" stroke="#727b76" stroke-opacity=".4" stroke-width="3"/>
+    <path d="M220 211c-11 25-12 60-8 91" stroke="#9a9e99" stroke-opacity=".35"/>
+    <path d="M432 154c31 28 49 72 48 111l-2 38" stroke="#e4533f" stroke-opacity=".7" stroke-width="2"/>
+    <!-- Temporal sockets and exposed actuators. -->
+    <path d="m205 311-11 17 7 71 13 19 22-8 12-48-11-45Z" fill="url(#side)" stroke="#31383a"/>
+    <path d="m495 311 11 17-7 71-13 19-22-8-12-48 11-45Z" fill="#0e1417" stroke="#b1372b" stroke-opacity=".66"/>
+    <path d="m204 331 5 54 10 12 10-6 5-32-10-25Z" fill="#05090b" stroke="#5e6662" stroke-opacity=".45"/>
+    <path d="m496 331-5 54-10 12-10-6-5-32 10-25Z" fill="#05090b" stroke="#79443b" stroke-opacity=".45"/>
+    <path d="m211 342 5 42m268-42-5 42" stroke="url(#piston)" stroke-width="7"/>
+    <use href="#boltShape" x="222" y="318"/><use href="#boltShape" x="478" y="318"/>
+    <!-- Heavy brow armor. -->
+    <path d="m238 299 35-15 35 7 26 15 16-12 16 12 26-15 35-7 35 15 9 31-19 13-26-5-39 12-20-9-17-23-17 23-20 9-39-12-26 5-19-13Z" fill="url(#bright)" stroke="#646a67" stroke-opacity=".48"/>
+    <path d="m241 302 33-13 30 7 24 16m131-10-33-13-30 7-24 16" stroke="#c1c3b9" stroke-opacity=".4" stroke-width="2"/>
+    <path d="m242 319 31-10 36 12 12 12-17 34-39 7-29-18-5-20Z" fill="#020506" stroke="#080d10" stroke-width="5"/>
+    <path d="m458 319-31-10-36 12-12 12 17 34 39 7 29-18 5-20Z" fill="#020506" stroke="#080d10" stroke-width="5"/>
+    <path d="m245 326 28-9 28 9 9 8m145-8-28-9-28 9-9 8" stroke="#8b928b" stroke-opacity=".37" stroke-width="2"/>
+    <ellipse cx="276" cy="344" rx="22" ry="21" fill="#131b1e" stroke="#4c5755" stroke-width="2"/>
+    <ellipse cx="276" cy="344" rx="15" ry="14" fill="#050c0f" stroke="#273b40" stroke-width="4"/>
+    <ellipse cx="276" cy="344" rx="7" ry="7" fill="#1e3035"/>
+    <path d="M269 335h8m-16 10 4 8" stroke="#96a5a1" stroke-opacity=".32"/>
+    <ellipse cx="424" cy="344" rx="23" ry="21" fill="#161010" stroke="#6f3c31" stroke-width="2"/>
+    <ellipse cx="424" cy="344" rx="18" ry="17" fill="#ff3423" opacity=".7" filter="url(#glow)"/>
+    <circle cx="424" cy="344" r="15" fill="url(#iris)"/>
+    <circle cx="424" cy="344" r="6" stroke="#ffac87" stroke-width="1.4"/>
+    <circle cx="424" cy="344" r="2.3" fill="#fff4d2"/>
+    <path d="M394 344h60" stroke="#ff4931" opacity=".8" filter="url(#fineGlow)"/>
+    <path d="M411 344h26" stroke="#ff9e7b" opacity=".72"/>
+    <path d="M424 327v6m0 22v6m-17-17h6m22 0h6" stroke="#ff6c4c" stroke-opacity=".75"/>
+    <!-- Zygomatic arches, nasal frame, and cheek pistons. -->
+    <path d="m234 365 31 20 37-8 20-20 5 21-24 31-31 17-29-22-11-23Z" fill="url(#bright)" stroke="#797f76" stroke-opacity=".28"/>
+    <path d="m466 365-31 20-37-8-20-20-5 21 24 31 31 17 29-22 11-23Z" fill="url(#metal)" stroke="#79534a" stroke-opacity=".4"/>
+    <path d="m239 370 26 18 31-6m165-12-26 18-31-6" stroke="#bcc0b5" stroke-opacity=".36" stroke-width="2"/>
+    <path d="m247 408 21 17-2 39-13-5-10-27Z" fill="#090f12" stroke="#57615d"/>
+    <path d="m453 408-21 17 2 39 13-5 10-27Z" fill="#090f12" stroke="#573d35"/>
+    <path d="m253 419 8 12-1 23m187-35-8 12 1 23" stroke="url(#piston)" stroke-width="7"/>
+    <path d="m350 322-15 17-7 44-10 23 10 19h44l10-19-10-23-7-44Z" fill="url(#metal)" stroke="#5f6962" stroke-opacity=".65"/>
+    <path d="m350 347-10 19-5 29 15-7 15 7-5-29Z" fill="#04090b"/>
+    <path d="m345 350-9 32m19-32 9 32" stroke="#a7aea1" stroke-opacity=".3"/>
+    <path d="m334 402 16-8 16 8-9 12h-14Z" fill="#040709"/>
+    <path d="m320 402-21 17-13 11 6 21h116l6-21-13-11-21-17-9 20h-42Z" fill="url(#metal)" stroke="#747c72" stroke-opacity=".4"/>
+    <path d="m298 428 25-4m54 0 25 4" stroke="#c1c4b9" stroke-opacity=".4" stroke-width="2"/>
+    <!-- Segmented mandibular hardware. -->
+    <path d="m236 427 13 35 29 27 10 31 36 31h53l36-31 9-31 29-27 13-35-16 6-13 25-32 19-17 24h-71l-17-24-32-19-13-25Z" fill="url(#jaw)" stroke="#4f5953" stroke-width="2"/>
+    <path d="m244 438 12 25 31 28 8 26 31 26h49l31-26 8-26 31-28 12-25" stroke="#939b8f" stroke-opacity=".34" stroke-width="2"/>
+    <path d="m283 450 11-7h112l11 7-6 39-26 26h-68l-26-26Z" fill="#04090b" stroke="#272f2d"/>
+    <path d="m295 446 12-6h86l12 6-3 17-21 6h-62l-21-6Z" fill="#626a62"/>
+    <g transform="translate(298 445)"><use href="#tooth"/><use href="#tooth" x="15"/><use href="#tooth" x="30"/><use href="#tooth" x="45"/><use href="#tooth" x="60"/><use href="#tooth" x="75"/><use href="#tooth" x="90"/></g>
+    <path d="m302 477 20 8h57l20-8 1 12-20 14h-60l-19-14Z" fill="url(#metal)" stroke="#2c3731"/>
+    <g transform="translate(309 478) scale(.84 -.7)"><use href="#tooth"/><use href="#tooth" x="15"/><use href="#tooth" x="30"/><use href="#tooth" x="45"/><use href="#tooth" x="60"/><use href="#tooth" x="75"/></g>
+    <path d="m315 511 16 11h38l16-11-4 19-16 9h-30l-16-9Z" fill="url(#metal)" stroke="#4f5a50"/>
+    <path d="M333 526h34" stroke="#7f897b" stroke-opacity=".6"/>
+    <path d="m277 463 7 16m139-16-7 16" stroke="#b5bba9" stroke-opacity=".4" stroke-width="3"/>
+    <use href="#boltShape" x="247" y="423"/><use href="#boltShape" x="453" y="423"/>
+    <use href="#boltShape" x="297" y="513"/><use href="#boltShape" x="403" y="513"/>
+    <circle cx="300" cy="410" r="4" fill="url(#bolt)"/><circle cx="400" cy="410" r="4" fill="url(#bolt)"/>
+    <path d="m447 459-28 29-9 33-33 29" stroke="#f05039" stroke-opacity=".36"/>
+    <path d="M444 166c26 28 37 61 36 96l-2 42 16 29-4 61-17 29-13 39-31 33-12 33-36 29" stroke="url(#redEdge)" stroke-width="2"/>
+    <!-- Hairline machining and restrained wear. -->
+    <path d="m289 173 9-3m-4 13 6-2m75 18 21-8m-13 15 11-4m-123 36 7 16m112 5 9-4m-141 53 12 3m137 87 8 3m-130-7 9-4m37 107 11 1m19-210 2 9" stroke="#d1d0bf" stroke-opacity=".14"/>
+    <path d="m307 154 16-2m49 0 18 2m-62 80 5 11m35-11-5 11" stroke="#e4e5d7" stroke-opacity=".12"/>
+  </g>
+</svg>
