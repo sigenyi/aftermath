@@ -9,27 +9,104 @@
   "descriptionOnlyCount": 529,
   "skillProfileCount": 3039,
   "optionalSkillCount": 58451,
+  "taskResearch": {
+    "sourceTasks": 18796,
+    "matchedTasks": 18678,
+    "statementMismatches": 5,
+    "unmatchedTasks": 155,
+    "linkedCitations": 56432
+  },
+  "forecastStatusCounts": {
+    "partial": 3943,
+    "insufficient-evidence": 501,
+    "conditional": 47
+  },
+  "numericEstimates": 3990,
+  "undatedProfiles": 501,
+  "distinctYears": 54,
+  "mostFrequentYears": [
+    [
+      2033,
+      623
+    ],
+    [
+      2032,
+      464
+    ],
+    [
+      2031,
+      237
+    ],
+    [
+      2049,
+      190
+    ],
+    [
+      2052,
+      152
+    ],
+    [
+      2035,
+      151
+    ],
+    [
+      2030,
+      144
+    ],
+    [
+      2034,
+      137
+    ],
+    [
+      2050,
+      135
+    ],
+    [
+      2036,
+      127
+    ],
+    [
+      2039,
+      127
+    ],
+    [
+      2053,
+      114
+    ],
+    [
+      2055,
+      112
+    ],
+    [
+      2040,
+      111
+    ],
+    [
+      2051,
+      110
+    ]
+  ],
   "totalRecords": 4491,
   "computedScenarios": 13473,
   "aliasCount": 88960,
-  "researchReferences": 32,
-  "baselineYearMin": 2035,
-  "baselineYearMax": 2097,
+  "researchReferences": 38,
+  "baselineYearMin": 2026,
+  "baselineYearMax": 2087,
   "capabilityCounts": {
-    "unknown": 2893,
-    "safety": 1687,
-    "reasoning": 4188,
-    "social": 2992,
-    "dexterity": 2631,
-    "creative": 1077,
-    "perception": 3412,
-    "digital": 2989,
-    "mobility": 947,
+    "social": 3013,
+    "reasoning": 4057,
+    "creative": 454,
+    "digital": 3187,
+    "safety": 1787,
+    "unknown": 2682,
+    "dexterity": 1962,
+    "perception": 2338,
     "discovery": 358,
-    "hardware": 616
+    "hardware": 901,
+    "mobility": 272
   },
-  "rolesWithUnmappedRequirements": 2893,
-  "rolesWithoutUnmappedRequirements": 1598,
+  "rolesWithUnmappedRequirements": 2682,
+  "rolesWithoutUnmappedRequirements": 1809,
   "failures": [],
   "validation": "Structural and consistency audit only; not empirical forecast accuracy."
 }

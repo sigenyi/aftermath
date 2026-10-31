@@ -1,9 +1,9 @@
 {
   "metadata": {
-    "reviewedAt": "2026-10-30",
-    "cutoff": "2026-10-30",
+    "reviewedAt": "2026-10-31",
+    "cutoff": "2026-10-31",
     "version": "1.0.0",
-    "scope": "Selected primary research and official reports across digital autonomy, embodied systems, social evaluation, scientific discovery, assurance, cost and historical technology progress.",
+    "scope": "Primary literature, numerical benchmark data, expert elicitation, and task-specific research. Evidence types are kept distinct.",
     "sourceCount": 32,
     "limitations": [
       "This is a documented research selection, not an exhaustive review of all scientific fields or all human history.",
@@ -504,6 +504,109 @@
       "observation": "Explains national employment projections with a ten-year horizon and how technology can affect productivity, occupational staffing and demand.",
       "limitation": "Employment projections and AI exposure categories are not full-automation dates. This source is an evolving FAQ; the listed date is the review date, not a claimed publication date.",
       "forecastUse": "Context separating labor-demand projections from technical automation scenarios; no numerical milestone parameters are taken from this FAQ."
+    },
+    {
+      "id": "metr-horizon-data",
+      "title": "Task-Completion Time Horizons of Frontier AI Models — official TH1.1 numerical results",
+      "publisher": "METR",
+      "date": "2026-10-31",
+      "dateType": "reviewed; dashboard last updated 2026-09-08",
+      "url": "https://metr.org/time-horizons/",
+      "dataUrl": "https://metr.org/assets/benchmark_results_1_1.yaml",
+      "type": "official benchmark dataset and methodology",
+      "domains": [
+        "digital"
+      ],
+      "observation": "Publishes per-model release dates, 50% and 80% software-task horizons, measurement bounds and frontier flags. The downloaded snapshot contains 26 observations across two task-suite versions.",
+      "limitation": "The dashboard is no longer actively maintained and warns that horizons above 16 hours cannot be measured reliably with this suite. Its tasks are bounded software, ML and cybersecurity problems; it does not publish 99% reliability horizons or occupation automation dates.",
+      "forecastUse": "Numerical source for the reproducible TH1.1 log2-horizon regression. Only comparable frontier observations within the stated measurement boundary are used in the primary fit."
+    },
+    {
+      "id": "metr-horizon-validity",
+      "title": "On the estimation and validity of AI time horizons—a statistical look at the METR plot",
+      "publisher": "Nguyen and Fithian / arXiv",
+      "date": "2026-10-08",
+      "url": "https://arxiv.org/abs/2610.12466",
+      "type": "research preprint",
+      "domains": [
+        "digital",
+        "measurement"
+      ],
+      "observation": "Reanalyzes 228 tasks and 26 models with spline and item-response approaches, finding nonlinearities between human task duration and AI difficulty and improved predictive scoring under alternative models.",
+      "limitation": "A statistical reanalysis of the measured task distribution does not directly forecast future capabilities or entire occupations. It is a preprint, and its alternatives do not remove external-validity uncertainty.",
+      "forecastUse": "Motivates explicit model-form uncertainty; an exponential trend fit to published horizons is useful as a conditional benchmark extrapolation rather than a universal progress law."
+    },
+    {
+      "id": "espai-2023-cleaned",
+      "title": "2023 Expert Survey on Progress in AI — cleaned responses and reproduced milestone distributions",
+      "publisher": "AI Impacts; Grace et al.; data repository by Tom Adamczewski",
+      "url": "https://raw.githubusercontent.com/tadamcz/espai/5bea2ed3014d5360d1599bad989d3252d3b8ba3c/data/2023%20ESPAI%20-%20Cleaned%20and%20Anonymized%20Responses.csv",
+      "paperUrl": "https://arxiv.org/html/2401.02843v3",
+      "date": "2024-12-15",
+      "domains": [
+        "digital",
+        "reasoning",
+        "perception",
+        "dexterity",
+        "mobility",
+        "social",
+        "creative",
+        "discovery"
+      ],
+      "type": "primary survey dataset; independently derived distribution",
+      "observation": "The October 2023 survey elicited 10/50/90% years or probabilities at fixed horizons for 39 tasks, four named occupations, HLMI and FAOL. This project independently fits gamma CDFs and pools both framings to derive milestone belief quantiles.",
+      "limitation": "Expert beliefs are not calibrated capability measurements. Task feasibility and full occupations have different scopes. Derived fitting is not the exact original pipeline; FAOL median differs by about seven years from the published result. Tails and transfer to other tasks are especially uncertain.",
+      "forecastUse": "Provides dated, scope-specific conditional milestone anchors. Numerical transfer, integration, reliability and deployment adjustments remain separate modeling assumptions."
+    },
+    {
+      "id": "srt-h-2025",
+      "title": "SRT-H: A Hierarchical Framework for Autonomous Surgery via Language Conditioned Imitation Learning",
+      "publisher": "Kim et al. / Johns Hopkins / Stanford",
+      "url": "https://arxiv.org/abs/2505.10251v3",
+      "date": "2025-07-08",
+      "domains": [
+        "dexterity",
+        "perception",
+        "safety"
+      ],
+      "type": "research paper",
+      "observation": "Reports successful autonomous execution of evaluated cholecystectomy steps in all eight trials on unseen ex vivo gallbladders.",
+      "limitation": "Small ex vivo experiment on selected steps; it does not establish clinical complication rates, autonomous patient care or full surgeon automation.",
+      "forecastUse": "A bounded demonstrated surgical milestone; does not itself supply a future automation year."
+    },
+    {
+      "id": "behavior-winner-2025",
+      "title": "Task adaptation of Vision-Language-Action model: 1st Place Solution for the 2025 BEHAVIOR Challenge",
+      "publisher": "Larchenko, Zarin and Karnatak / Robot Learning Collective",
+      "url": "https://arxiv.org/abs/2512.06951v2",
+      "dataUrl": "https://robot-learning-collective.github.io/winning-behavior-1k-challenge",
+      "date": "2025-12-21",
+      "domains": [
+        "dexterity",
+        "perception",
+        "mobility",
+        "reasoning"
+      ],
+      "type": "research paper and author results report",
+      "observation": "Winning 50-task household simulation policy reported private full-task success 0.124 and partial-progress q-score 0.260; demonstrations averaged 6.6 minutes.",
+      "limitation": "Simulation, task-specific training and inference corrections; a q-score is not the complete-task success rate, and neither establishes real-home deployment reliability.",
+      "forecastUse": "Separates partial progress from end-to-end success and supports coupled physical requirements; no calendar forecast is supplied."
+    },
+    {
+      "id": "robot-task-evidence",
+      "title": "What work can robots do? — task-level research dataset",
+      "publisher": "Legate-Yang and Massenkoff / Anthropic",
+      "date": "2026-09-30",
+      "url": "https://huggingface.co/datasets/Anthropic/EconomicIndex/blob/430f214c438dd25e0e26a3e5b84dc502d6894997/robot_exposure/README.md",
+      "type": "published AI-assisted task assessments with cited examples",
+      "domains": [
+        "physical work",
+        "mapping",
+        "robotics"
+      ],
+      "observation": "Contains 18,796 task classifications and 56,933 cited references. Physical execution is distinguished from human computer use. Capability tiers identify the setting in which cited robots are reported to perform example tasks.",
+      "limitation": "Ratings, task examples and time shares were generated with AI-assisted research. Exposure is not complete occupational automation; citations have not all been independently verified by AFTERMATH. This app does not treat generated time shares as measured data.",
+      "forecastUse": "Exact occupation-code, task-ID and statement joins add task-specific physical/nonphysical assessments and source links. No exposure tier is directly converted into an automation year."
     }
   ]
 }

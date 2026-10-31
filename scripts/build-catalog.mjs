@@ -1,6 +1,7 @@
 import {readFile,writeFile,mkdir,rm} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {assessOccupation} from '../dist/forecast.js';
+import {MODEL_VERSION} from '../dist/engine.js';
 import {prepareOccupation} from '../dist/profile.js';
 const root=new URL('../',import.meta.url),data=new URL('dist/data/',root);
 const sha=contents=>createHash('sha256').update(contents).digest('hex');
@@ -13,12 +14,23 @@ for(const key of ['onet','esco','isco']){
   audit.sourceCounts[key]=source.roles.length;
   for(const role of source.roles){roles.push(role);audit.rawRequirementCount+=(role.tasks||[]).length;audit.optionalSkillCount+=(role.optionalSkills||[]).length;if(!role.tasks?.length)audit.descriptionOnlyCount++;if(role.coverage==='skills')audit.skillProfileCount++;}
 }
+const robotResearch=await readJSON('dist/data/robot-task-evidence.json');
+const normalized=value=>String(value??'').normalize('NFKC').replace(/\s+/g,' ').trim().toLowerCase();
+const robotById=new Map(robotResearch.tasks.map(task=>[task.taskId,task]));
+audit.taskResearch={sourceTasks:robotResearch.tasks.length,matchedTasks:0,statementMismatches:0,unmatchedTasks:0,linkedCitations:0};
+for(const role of roles.filter(role=>role.source==='onet'))for(const task of role.tasks||[]){
+  const research=robotById.get(task.id);
+  if(!research){audit.taskResearch.unmatchedTasks++;continue;}
+  if(normalized(research.label)!==normalized(task.label)){audit.taskResearch.statementMismatches++;continue;}
+  const {taskId,label,...assessment}=research;
+  task.automationEvidence=assessment;audit.taskResearch.matchedTasks++;audit.taskResearch.linkedCitations+=assessment.sources.length;
+}
 const ids=new Set();for(const role of roles){if(ids.has(role.id))throw new Error(`Duplicate ID ${role.id}`);ids.add(role.id);}
 const chunkDir=new URL('occupations/',data);await mkdir(chunkDir,{recursive:true});
 const index=[],forecasts=[],failures=[],capabilityCounts={};
 let minYear=Infinity,maxYear=-Infinity,unmappedRoles=0,sourceRowsWithFullMapping=0;
 const evidence=await readJSON('dist/data/evidence.json'),sourceIds=new Set(evidence.sources.map(source=>source.id));
-for(const source of evidence.sources){if(!source.id||!source.url||!source.title)throw new Error('Invalid research reference.');if(source.date&&/^\d{4}-\d{2}-\d{2}$/.test(source.date)&&source.date>'2026-10-30')throw new Error(`Future research: ${source.id}`);}
+for(const source of evidence.sources){if(!source.id||!source.url||!source.title)throw new Error('Invalid research reference.');if(source.date&&/^\d{4}-\d{2}-\d{2}$/.test(source.date)&&source.date>'2026-10-31')throw new Error(`Future research: ${source.id}`);}
 for(const key of ['onet','esco','isco']){
   const subset=roles.filter(role=>role.source===key);
   for(let offset=0;offset<subset.length;offset+=60){
@@ -28,23 +40,24 @@ for(const key of ['onet','esco','isco']){
       const profile=prepareOccupation(role);audit.selectedRequirementCount+=profile.tasks.length;
       const reports={};for(const scenario of ['accelerated','central','conservative'])reports[scenario]=assessOccupation(profile,{scenario,assessmentYear:2026});
       const r=reports.central;
-      if(!Number.isInteger(r.baselineYear)||r.baselineYear<=2026)failures.push(`${role.id}: invalid baseline`);
-      if(!(reports.accelerated.baselineYear<=r.baselineYear&&r.baselineYear<=reports.conservative.baselineYear))failures.push(`${role.id}: nonmonotonic scenarios`);
+      if(r.baselineYear!==null&&(!Number.isInteger(r.baselineYear)||r.baselineYear<2026))failures.push(`${role.id}: invalid baseline`);
+      if([reports.accelerated.baselineYear,r.baselineYear,reports.conservative.baselineYear].every(Number.isFinite)&&!(reports.accelerated.baselineYear<=r.baselineYear&&r.baselineYear<=reports.conservative.baselineYear))failures.push(`${role.id}: nonmonotonic scenarios`);
       if(r.tasks.length!==profile.tasks.length)failures.push(`${role.id}: omitted input requirements`);
-      if(r.baselineYear<Math.max(...r.capabilities.map(cap=>cap.baselineYear)))failures.push(`${role.id}: endpoint before a required capability`);
+      if(Number.isFinite(r.baselineYear)&&r.baselineYear<Math.max(...r.capabilities.map(cap=>cap.baselineYear).filter(Number.isFinite)))failures.push(`${role.id}: endpoint before a required capability`);
       for(const cap of r.capabilities){capabilityCounts[cap.id]=(capabilityCounts[cap.id]||0)+1;for(const id of cap.evidenceIds||[]){if(!sourceIds.has(id))failures.push(`${role.id}: missing evidence ${id}`);}}
-      minYear=Math.min(minYear,r.baselineYear);maxYear=Math.max(maxYear,r.baselineYear);
+      if(Number.isFinite(r.baselineYear)){minYear=Math.min(minYear,r.baselineYear);maxYear=Math.max(maxYear,r.baselineYear);}
       if(r.coverage?.unmappedTasks>0)unmappedRoles++;else sourceRowsWithFullMapping++;
       index.push({id:role.id,title:role.title,aliases:role.aliases||[],sector:role.sector,source:role.source,sourceCode:role.sourceCode,sourceVersion:role.sourceVersion,coverage:role.coverage,taskCount:profile.tasks.length,file});
-      forecasts.push({id:role.id,baselineYear:r.baselineYear,fasterYear:reports.accelerated.baselineYear,slowerYear:reports.conservative.baselineYear,capabilities:r.capabilities.map(cap=>({id:cap.id,year:cap.baselineYear,evidenceIds:cap.evidenceIds})),integrationYears:r.integrationYears,coverage:r.coverage});
+      forecasts.push({id:role.id,baselineYear:r.baselineYear,forecastStatus:r.forecastStatus,fasterYear:reports.accelerated.baselineYear,slowerYear:reports.conservative.baselineYear,capabilities:r.capabilities.map(cap=>({id:cap.id,year:cap.baselineYear,evidenceIds:cap.evidenceIds})),integrationYears:r.integrationYears,milestoneIds:r.workflow.milestoneIds,dependenceSensitivity:r.workflow.sensitivity,coverage:r.coverage});
     }
   }
 }
 if(failures.length)throw new Error(`Catalog model audit failed:\n${failures.slice(0,30).join('\n')}`);
-const metadata={version:'1.0.0',asOf:'2026-10-30',sources,totalRecords:roles.length,aliasCount:roles.reduce((n,role)=>n+(role.aliases||[]).length,0),researchReferences:evidence.sources.length,scope:'Versioned source records, not a deduplicated census of all possible jobs. English ESCO; U.S. O*NET; ISCO unit groups.',modelSourceSha256:sha(await readFile(new URL('dist/forecast.js',root))),evidenceSha256:sha(JSON.stringify(evidence))};
+const metadata={version:MODEL_VERSION,asOf:'2026-10-31',sources,totalRecords:roles.length,aliasCount:roles.reduce((n,role)=>n+(role.aliases||[]).length,0),researchReferences:evidence.sources.length,scope:'Versioned source records, not a deduplicated census of all possible jobs. English ESCO; U.S. O*NET; ISCO unit groups.',modelSourceSha256:sha(Buffer.concat(await Promise.all(['forecast.js','mapping.js','horizons.js','workflow.js','milestone-data.js','digital-forecast.js','digital-calibration-data.js','profile.js'].map(file=>readFile(new URL('dist/'+file,root)))))),evidenceSha256:sha(JSON.stringify(evidence)),robotResearch:robotResearch.metadata};
 await writeFile(new URL('catalog-index.json',data),JSON.stringify({metadata,roles:index}));
 await writeFile(new URL('forecast-index.json',data),JSON.stringify({metadata:{asOf:metadata.asOf,modelVersion:metadata.version,modelSourceSha256:metadata.modelSourceSha256,evidenceSha256:metadata.evidenceSha256,note:'Conditional model estimates; not validated occupational automation dates.'},forecasts}));
-Object.assign(audit,{totalRecords:roles.length,computedScenarios:roles.length*3,aliasCount:metadata.aliasCount,researchReferences:evidence.sources.length,baselineYearMin:minYear,baselineYearMax:maxYear,capabilityCounts,rolesWithUnmappedRequirements:unmappedRoles,rolesWithoutUnmappedRequirements:sourceRowsWithFullMapping,failures,validation:'Structural and consistency audit only; not empirical forecast accuracy.'});
+const yearCounts=new Map();for(const row of forecasts)if(Number.isFinite(row.baselineYear))yearCounts.set(row.baselineYear,(yearCounts.get(row.baselineYear)||0)+1);
+Object.assign(audit,{forecastStatusCounts:forecasts.reduce((counts,row)=>{counts[row.forecastStatus]=(counts[row.forecastStatus]||0)+1;return counts;},{}),numericEstimates:forecasts.filter(r=>Number.isFinite(r.baselineYear)).length,undatedProfiles:forecasts.filter(r=>r.baselineYear===null).length,distinctYears:yearCounts.size,mostFrequentYears:[...yearCounts].sort((a,b)=>b[1]-a[1]).slice(0,15),totalRecords:roles.length,computedScenarios:roles.length*3,aliasCount:metadata.aliasCount,researchReferences:evidence.sources.length,baselineYearMin:minYear,baselineYearMax:maxYear,capabilityCounts,rolesWithUnmappedRequirements:unmappedRoles,rolesWithoutUnmappedRequirements:sourceRowsWithFullMapping,failures,validation:'Structural and consistency audit only; not empirical forecast accuracy.'});
 await writeFile(new URL('research/CATALOG-AUDIT.json',root),JSON.stringify(audit,null,2)+'\n');
-await writeFile(new URL('research/CATALOG-AUDIT.md',root),`# Catalog-wide audit\n\nReference date: October 30, 2026.\n\n${roles.length.toLocaleString()} source records; ${(roles.length*3).toLocaleString()} scenario calculations.\n\n| Source | Records |\n| --- | ---: |\n${Object.entries(audit.sourceCounts).map(([key,n])=>`| ${key.toUpperCase()} | ${n.toLocaleString()} |`).join('\n')}\n\n- ${audit.rawRequirementCount.toLocaleString()} imported required task/skill statements.\n- ${audit.optionalSkillCount.toLocaleString()} optional skills retained separately, not silently treated as universal requirements.\n- ${audit.descriptionOnlyCount} source records require a description or classification proxy.\n- ${audit.researchReferences} published research references in the registry.\n- ${unmappedRoles} profiles contain explicitly unmapped requirements.\n- All input requirements retained in model output; no occupation is dropped.\n- Every reference ID resolves; all baseline years are finite integers.\n- Faster ≤ baseline ≤ slower for every profile; endpoint never precedes a required capability.\n\n## What this does not validate\n\nThese checks establish software consistency and source coverage, not accuracy of future dates. Whole-role full-automation outcomes are not available as a calibrated validation set. Overlapping source records are not unique jobs. Missing requirements, occupational variation, unobserved future discoveries, and economic adoption can materially change the outputs.\n`);
+await writeFile(new URL('research/CATALOG-AUDIT.md',root),`# Catalog-wide audit\n\nReference date: October 31, 2026.\n\n${roles.length.toLocaleString()} source records; ${(roles.length*3).toLocaleString()} scenario calculations.\n\n| Source | Records |\n| --- | ---: |\n${Object.entries(audit.sourceCounts).map(([key,n])=>`| ${key.toUpperCase()} | ${n.toLocaleString()} |`).join('\n')}\n\n- ${audit.rawRequirementCount.toLocaleString()} imported required task/skill statements.\n- ${audit.optionalSkillCount.toLocaleString()} optional skills retained separately, not silently treated as universal requirements.\n- ${audit.descriptionOnlyCount} source records require a description or classification proxy.\n- ${audit.researchReferences} published research references in the registry.\n- ${unmappedRoles} profiles contain explicitly unmapped requirements.\n- All input requirements retained in model output; no occupation is dropped.\n- Every reference ID resolves; numeric estimates are finite integers; insufficiently supported profiles remain undated.\n- Faster ≤ baseline ≤ slower wherever all three are dated; dated endpoints never precede a dated required capability.\n- ${audit.taskResearch.matchedTasks.toLocaleString()} tasks joined to published physical-work assessments with ${audit.taskResearch.linkedCitations.toLocaleString()} cited references.\n- ${audit.numericEstimates.toLocaleString()} conditional numeric estimates; ${audit.undatedProfiles.toLocaleString()} profiles without a supported numeric estimate.\n- ${audit.distinctYears} distinct central years. No random jitter or title-based offsets are added.\n- Evidence status: ${audit.forecastStatusCounts.partial||0} partial, ${audit.forecastStatusCounts.conditional||0} conditional without a detected mapping gap, ${audit.forecastStatusCounts['insufficient-evidence']||0} undated. None is a validated occupational prediction.\n\n## What this does not validate\n\nThese checks establish software consistency and source coverage, not accuracy of future dates. Whole-role full-automation outcomes are not available as a calibrated validation set. Overlapping source records are not unique jobs. Missing requirements, occupational variation, unobserved future discoveries, and economic adoption can materially change the outputs.\n`);
 console.log(JSON.stringify(audit,null,2));

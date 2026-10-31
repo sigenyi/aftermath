@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "reviewedAt": "2026-10-31",
+    "cutoff": "2026-10-31",
+    "scope": "Additional primary sources for numeric digital-benchmark calibration."
+  },
+  "sources": [
+    {
+      "id": "metr-horizon-data",
+      "title": "Task-Completion Time Horizons of Frontier AI Models — official TH1.1 numerical results",
+      "publisher": "METR",
+      "date": "2026-10-31",
+      "dateType": "reviewed; dashboard last updated 2026-09-08",
+      "url": "https://metr.org/time-horizons/",
+      "dataUrl": "https://metr.org/assets/benchmark_results_1_1.yaml",
+      "type": "official benchmark dataset and methodology",
+      "domains": [
+        "digital"
+      ],
+      "observation": "Publishes per-model release dates, 50% and 80% software-task horizons, measurement bounds and frontier flags. The downloaded snapshot contains 26 observations across two task-suite versions.",
+      "limitation": "The dashboard is no longer actively maintained and warns that horizons above 16 hours cannot be measured reliably with this suite. Its tasks are bounded software, ML and cybersecurity problems; it does not publish 99% reliability horizons or occupation automation dates.",
+      "forecastUse": "Numerical source for the reproducible TH1.1 log2-horizon regression. Only comparable frontier observations within the stated measurement boundary are used in the primary fit."
+    },
+    {
+      "id": "metr-horizon-validity",
+      "title": "On the estimation and validity of AI time horizons—a statistical look at the METR plot",
+      "publisher": "Nguyen and Fithian / arXiv",
+      "date": "2026-10-08",
+      "url": "https://arxiv.org/abs/2610.12466",
+      "type": "research preprint",
+      "domains": [
+        "digital",
+        "measurement"
+      ],
+      "observation": "Reanalyzes 228 tasks and 26 models with spline and item-response approaches, finding nonlinearities between human task duration and AI difficulty and improved predictive scoring under alternative models.",
+      "limitation": "A statistical reanalysis of the measured task distribution does not directly forecast future capabilities or entire occupations. It is a preprint, and its alternatives do not remove external-validity uncertainty.",
+      "forecastUse": "Motivates explicit model-form uncertainty; an exponential trend fit to published horizons is useful as a conditional benchmark extrapolation rather than a universal progress law."
+    }
+  ]
+}

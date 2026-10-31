@@ -18,7 +18,7 @@ export function installCatalog(index,evidence={sources:[]}){
   revision++;chunkCache.clear();
   return catalog;
 }
-async function getJSON(path){const response=await fetch(new URL(path,import.meta.url));if(!response.ok)throw new Error(`Could not load occupation data (${response.status}).`);return response.json();}
+async function getJSON(path){const url=new URL(path,import.meta.url);url.searchParams.set('v',new URL(import.meta.url).searchParams.get('v')||'2.0.0');const response=await fetch(url);if(!response.ok)throw new Error(`Could not load occupation data (${response.status}).`);return response.json();}
 export function loadCatalog(){
   if(!ready)ready=Promise.all([getJSON('./data/catalog-index.json'),getJSON('./data/evidence.json')]).then(([index,evidence])=>installCatalog(index,evidence)).catch(error=>{ready=null;throw error;});
   return ready;

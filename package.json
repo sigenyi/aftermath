@@ -1,13 +1,13 @@
 {
   "name": "aftermath",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "description": "Full-automation scenario explorer with a cinematic machine-intelligence interface",
   "scripts": {
     "start": "python3 -m http.server 4173 --directory dist",
-    "test": "node --test engine.test.mjs search.test.mjs forecast.test.mjs",
-    "check": "node --check dist/app.js && node --check dist/catalog.js && node --check dist/engine.js && node --check dist/forecast.js && node --check dist/profile.js && node --check dist/search.js",
+    "test": "node --test *.test.mjs",
+    "check": "node --check dist/app.js && node --check dist/catalog.js && node --check dist/engine.js && node --check dist/forecast.js && node --check dist/profile.js && node --check dist/search.js && node --check dist/mapping.js && node --check dist/horizons.js && node --check dist/digital-forecast.js && node --check dist/workflow.js",
     "build:catalog": "node scripts/build-catalog.mjs"
   }
 }

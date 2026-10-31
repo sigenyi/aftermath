@@ -128,3 +128,62 @@ This release completes the catalog/interface expansion, not universal scientific
 - Verified a complete librarian result after the cinematic reveal on the deployed site, including its full requirements, red central year, multiple technology areas, and explicit unresolved-input count. No browser warning or error messages appeared.
 - Saved a live report screenshot with the user-facing outputs. Closed the local preview and recorded the deployment outcome here.
 - This documentation update changes no application behavior. The research limitations above remain in effect; deployment success does not validate prediction accuracy.
+
+## Revision 2 — Evidence-based numerical model and mapping repair
+
+Started: October 31, 2026 (America/Los_Angeles).
+
+The user correctly identified false robotic requirements for Web Developers and excessive repeated years. The previous release's catalog coverage did not establish forecast accuracy; research citations supported broad capability distinctions while the numerical dates were hand-authored assumptions. This revision addresses that mismatch directly.
+
+### Initial diagnosis
+
+- Web Developers were assigned robotic manipulation because “digital media” matched an overly broad digging rule and software “tools” allowed a physical interpretation. A task describing hardware specifications also matched a physical operation rule.
+- “Renew domain name registrations” was unresolved and received the generic 2071 milestone. This is routine digital administration, not an undiscovered technology.
+- Across 4,491 records, 2,692 had the generic unknown milestone as their latest prerequisite. The most common year was 2080 (649 records); only 61 distinct central years appeared. Repetition alone does not disprove a forecast, but this repetition was substantially caused by a shared arbitrary fallback.
+
+### Work in progress
+
+- [x] Replace broad physical keyword rules with action/object/context checks and require actual physical work before applying human dexterity ratings to automation.
+- [x] Research and fit available numerical software capability observations, retaining source data and out-of-time evaluation.
+- [x] Acquire granular published milestone forecasts and distinguish expert elicitation from observed performance.
+- [x] Replace the universal unknown-year shortcut; unknown requirements must remain visible without inventing a shared technological breakthrough.
+- [x] Recalculate every catalog record, compare distributions and examples, and publish the actual change in coverage and evidence basis.
+- [ ] Verify the live site and update this log through deployment.
+
+Scientific requirement: stronger empirical grounding must not be relabeled as demonstrated whole-job prediction accuracy. Calibration claims will specify the observed outcome tested, held-out data, error metrics, and limits of transfer to work outside that domain.
+
+### Revision 2 milestone — Numerical and task-level evidence acquired
+
+- Imported a pinned CC BY 4.0 robotics research dataset: 18,796 O*NET 29.3 tasks, 7,594 classified as physical, and 56,933 cited references. Exact code + task ID + normalized statement checks are required before joining it to O*NET 31.0.
+- These are published AI-assisted assessments with source links, not independently observed trials for every task. Generated time shares and example prevalence are excluded from the forecasting inputs.
+- Acquired METR's numerical TH1.1 snapshot and reproduced its approximately 128.744-day 50%-horizon doubling fit. The separate 80% fit doubles in approximately 133.405 days.
+- Temporal holdout error is substantial: log-scale RMSE corresponds to factors of approximately 3.60 (50% success) and 4.57 (80% success). This is scoped software-benchmark evaluation, not proof of accurate occupational automation years. Unsupported near-perfect reliability targets return no estimate.
+- Acquired all 39 task milestones, four named full-occupation forecasts, and global context endpoints from the 2023 expert survey's released responses. Reproducing gamma fits and mean-CDF pooling while preserving elicitation-framing differences and underidentified tails.
+- The new forecast will expose source-linked milestones and actual driving duties. It removes the universal missing-requirement year and unsupported fixed integration delay. Integration and reliability remain explicit conditions where no independently dated evidence exists.
+
+### Revision 2 milestone — Mapping, task provenance and joint timing implemented
+
+- Replaced substring physical rules with explicit actions, physical objects and context. Web Developers no longer acquire robotic hands, mobility or durable machinery from digital media, software tools, hardware specifications or security measures. Physical data-entry duties such as loading paper remain physical when actually present.
+- Human manual-dexterity ratings no longer imply that a computer-only job requires a robot. Original role ratings and descriptions are removed when the user replaces source duties; append-only edits preserve original requirements while keeping new duties separate.
+- Joined 18,678 unchanged O*NET tasks to published assessments and 56,432 citation entries. Five changed statements and 155 unmatched current tasks do not inherit stale assessments. Users can inspect task-level examples and references; these entries were not all independently re-reviewed.
+- Published milestone distributions now provide dated anchors, with explicit task-transfer assumptions. Source-free physics, missing comparators and classification-only titles stay undated instead of receiving an invented 2071 deadline. Partial projections disclose their undated requirements.
+- Added a joint completion model for distinct required events: F(t) = 0.5 × min(F_i(t)) + 0.5 × product(F_i(t)). This is an explicitly assumed mixture of perfectly shared and independent progress, not an empirically fitted correlation or calibrated probability. The final point is a quantile of this conditional model, rather than the maximum of individual medians.
+- Exact repeated milestones count once. A directly surveyed full occupation covers its unchanged source duties; custom additions retain separate requirements. Remaining overlap between differently named survey tasks is a limitation.
+- CDF values directly evaluate fitted source distributions at 441 dates from 2023 through 3023. Interpolation locates crossings; the model does not extend beyond the grid. Distant gamma tails are especially uncertain.
+- Current full-catalog calculation: 4,491 records and 13,473 scenarios; 3,990 numeric conditional projections and 501 undated profiles, including all 436 ISCO group-only records. There are 59 distinct central years at this checkpoint. Shared years remain where source evidence and dependencies coincide; no random variation is added.
+- Direct software benchmark measurements, historical expert beliefs and current task-readiness assessments remain separately identified. None establishes calibrated full-job completion dates.
+- Regression tests and browser review are underway before deployment.
+
+### Revision 2 milestone — Final review and release checks
+
+- Corrected additional semantic collisions found during browser review: authoring tools/authorities versus expressive writing; server versus serving people; information/reference/publication nouns versus communication acts; continuing education versus teaching; and building/safety codes versus software code. O*NET Originality becomes general reasoning unless expressive work is actually present.
+- Tightened task analogies: surgical laser repair is equipment maintenance, not surgery. Domain registration, email inquiries, Web sites/applications, server configuration, prototypes and sequence diagrams receive explicit digital-work analogies rather than unrelated breakthroughs.
+- Web Developers now has 29 requirements across digital work, reasoning and communication; no robotic manipulation, mobility, physical systems or false creative-writing prerequisite. Its conditional baseline is 2035 under the stated dependence/transfer assumptions; one collaboration requirement remains without a sufficiently comparable social milestone. This is an illustrative model output, not a validated 2035 deadline.
+- Final full-catalog audit: 3990 numeric conditional projections, 501 undated records and 54 distinct central years. Of the numeric projections, 3943 are partial and 47 have no detected mapping gap. Lack of a detected gap does not establish complete real-world coverage.
+- All 81 tests passed, plus syntax checks and all 13,473 scenario consistency calculations. Regression coverage includes actual source tasks, positive physical-work controls, task editing and additions, numerical-fit provenance, dependency aggregation, unsupported tails and no generic fallback year.
+- Browser checks passed for desktop and 390×844 layouts, keyboard autocomplete, the cinematic reveal and skip, task-research disclosure, a physical occupation with citations, and explicitly unsupported physics. No browser warnings/errors appeared. Module and data URLs are versioned to prevent the previous cached model from mixing with this release.
+- Publishing remains GitHub Pages only. No OpenAI runtime, AI API or site-hosting integration is added. Final live-deployment verification follows.
+
+### Remaining research limits after revision 2
+
+The statistical fit is evaluated on software benchmarks only. The occupational model uses historical expert beliefs, provisional task analogies and an explicitly assumed dependence model. Current demonstrations provide readiness context; they are not silently treated as a calibrated Bayesian update to future completion dates. Most profiles still have unsupported requirements. The release does not claim that every cited paper was independently read, every possible breakthrough was enumerated, or any occupation's exact future completion date was validated. Next scientific work requires adjudicating task mappings, obtaining outcome-specific reliability/cost evidence, testing elicitation forecasts against observed milestones and gathering direct forecasts for presently unsupported requirements.
