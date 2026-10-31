@@ -1,0 +1,509 @@
+{
+  "metadata": {
+    "reviewedAt": "2026-10-30",
+    "cutoff": "2026-10-30",
+    "version": "1.0.0",
+    "scope": "Selected primary research and official reports across digital autonomy, embodied systems, social evaluation, scientific discovery, assurance, cost and historical technology progress.",
+    "sourceCount": 32,
+    "limitations": [
+      "This is a documented research selection, not an exhaustive review of all scientific fields or all human history.",
+      "Evidence describes observations, evaluations, historical patterns or explicitly attributed expert opinions. Numerical capability and deployment horizons are authored scenario assumptions, not calibrated estimates from these publications.",
+      "Dates refer to initial public versions except specifically identified corrections and reports; abstracts and relevant methods/limitations were reviewed, not every experiment independently replicated.",
+      "No publication after the evidence cutoff is included. Historical benchmark results must not be presented as current frontier performance."
+    ]
+  },
+  "sources": [
+    {
+      "id": "metr-horizon",
+      "title": "Measuring AI Ability to Complete Long Software Tasks",
+      "publisher": "METR / NeurIPS",
+      "date": "2025-03-18",
+      "url": "https://arxiv.org/abs/2503.14499",
+      "domains": [
+        "digital",
+        "reasoning"
+      ],
+      "observation": "Measures success on software tasks by the time humans take, and reports a historical increase in the task length at which agents achieve 50% success.",
+      "limitation": "A 50% benchmark success horizon is not reliable autonomous employment. The trend concerns software tasks; its continuation and external validity are uncertain.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "metr-th11",
+      "title": "Time Horizon 1.1",
+      "publisher": "METR",
+      "date": "2026-01-29",
+      "url": "https://metr.org/blog/2026-01-29-time-horizon-1-1/",
+      "domains": [
+        "digital",
+        "reasoning"
+      ],
+      "observation": "Updates the task suite and time-horizon estimates with more long tasks and revised evaluation methods.",
+      "limitation": "Suite composition, human time estimates, agent scaffolding and measurement uncertainty affect the estimates. No cross-domain robotic progress rate is established.",
+      "type": "technical research report",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "osworld",
+      "title": "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments",
+      "publisher": "OSWorld authors / NeurIPS",
+      "date": "2024-04-11",
+      "url": "https://arxiv.org/abs/2404.07972",
+      "domains": [
+        "digital"
+      ],
+      "observation": "Introduces 369 real computer tasks with execution-based evaluation. Original experiments expose difficulty with GUI grounding and operational knowledge.",
+      "limitation": "The paper’s original scores are historical baselines, not current model scores; desktop benchmarks do not cover every workplace exception.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "webarena",
+      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+      "publisher": "WebArena authors / ICLR",
+      "date": "2023-07-25",
+      "url": "https://arxiv.org/abs/2307.13854",
+      "domains": [
+        "digital"
+      ],
+      "observation": "Evaluates agents completing realistic, functionally checked tasks in websites rather than only producing plausible text.",
+      "limitation": "Original benchmark results are historical. Simulated websites and bounded tasks do not establish full workflow reliability or deployment economics.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "swebench",
+      "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+      "publisher": "SWE-bench authors / ICLR",
+      "date": "2023-10-10",
+      "url": "https://arxiv.org/abs/2310.06770",
+      "domains": [
+        "digital",
+        "reasoning"
+      ],
+      "observation": "Uses real repository issues requiring code edits and testing, highlighting multi-file context and environment interaction.",
+      "limitation": "Repository issue resolution is narrower than the complete software occupation. Initial results must not be represented as current frontier performance.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "tau-bench",
+      "title": "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+      "publisher": "τ-bench authors",
+      "date": "2024-06-17",
+      "url": "https://arxiv.org/abs/2406.12045",
+      "domains": [
+        "digital",
+        "reasoning",
+        "social",
+        "safety"
+      ],
+      "observation": "Combines simulated users, tools and domain rules. Repeated-trial evaluation distinguishes occasional task success from consistent success.",
+      "limitation": "Simulated user interactions and selected service domains are not universal reliability evidence.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "open-x",
+      "title": "Open X-Embodiment: Robotic Learning Datasets and RT-X Models",
+      "publisher": "Open X-Embodiment Collaboration",
+      "date": "2023-10-13",
+      "url": "https://arxiv.org/abs/2310.08864",
+      "domains": [
+        "perception",
+        "dexterity"
+      ],
+      "observation": "Studies pooled robot experience and transfer across different robot embodiments, addressing fragmentation of robot training data.",
+      "limitation": "Transfer in the studied datasets does not demonstrate arbitrary dexterity or unattended operation in every environment.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "pi05",
+      "title": "π0.5: a Vision-Language-Action Model with Open-World Generalization",
+      "publisher": "Physical Intelligence",
+      "date": "2025-04-22",
+      "url": "https://arxiv.org/abs/2504.16054",
+      "domains": [
+        "perception",
+        "dexterity",
+        "mobility"
+      ],
+      "observation": "Reports generalization of robot manipulation to unfamiliar homes using heterogeneous training sources, including selected long household workflows.",
+      "limitation": "The reported tasks and environments are bounded demonstrations, not evidence of universal robotic labor or commercial cost competitiveness.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "gemini-robotics",
+      "title": "Gemini Robotics: Bringing AI into the Physical World",
+      "publisher": "Google DeepMind",
+      "date": "2025-03-25",
+      "url": "https://arxiv.org/abs/2503.20020",
+      "domains": [
+        "perception",
+        "dexterity",
+        "mobility"
+      ],
+      "observation": "Introduces robotics-focused vision-language-action and embodied reasoning models that translate multimodal reasoning into robot control.",
+      "limitation": "A model report’s tested capabilities do not validate every physical work task; real-world generalization and safety need deployment-specific evaluation.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "aloha",
+      "title": "Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware",
+      "publisher": "Zhao, Kumar, Levine and Finn / RSS",
+      "date": "2023-04-23",
+      "url": "https://arxiv.org/abs/2304.13705",
+      "domains": [
+        "dexterity"
+      ],
+      "observation": "Demonstrates precise two-arm imitation learning with low-cost hardware and action chunking on selected manipulation tasks.",
+      "limitation": "Training demonstrations, known hardware and selected tasks constrain the evidence; this is not general manipulation without supervision.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "mobile-aloha",
+      "title": "Mobile ALOHA: Learning Bimanual Mobile Manipulation with Low-Cost Whole-Body Teleoperation",
+      "publisher": "Fu, Zhao and Finn",
+      "date": "2024-01-04",
+      "url": "https://arxiv.org/abs/2401.02117",
+      "domains": [
+        "dexterity",
+        "mobility",
+        "hardware"
+      ],
+      "observation": "Combines mobile movement and bimanual manipulation, using teleoperation demonstrations and co-training for selected whole-body tasks.",
+      "limitation": "Per-task training and experimental settings limit transfer claims; capital cost, maintenance and autonomous recovery are separate questions.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "droid",
+      "title": "DROID: A Large-Scale In-The-Wild Robot Manipulation Dataset",
+      "publisher": "DROID collaboration",
+      "date": "2024-03-19",
+      "url": "https://arxiv.org/abs/2403.12945",
+      "domains": [
+        "perception",
+        "dexterity"
+      ],
+      "observation": "Provides diverse real-world manipulation data and documents the logistical, safety and labor challenges of collecting robot experience.",
+      "limitation": "More data and observed transfer do not imply that every environment or contact interaction has been solved.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "behavior",
+      "title": "BEHAVIOR-1K: A Human-Centered, Embodied AI Benchmark with 1,000 Everyday Activities and Realistic Simulation",
+      "publisher": "BEHAVIOR-1K authors",
+      "date": "2024-03-14",
+      "url": "https://arxiv.org/abs/2403.09227",
+      "domains": [
+        "perception",
+        "dexterity",
+        "mobility"
+      ],
+      "observation": "Builds a benchmark of 1,000 everyday activities with realistic objects and physical interactions, exposing complex long-horizon embodied demands.",
+      "limitation": "Simulation and a task benchmark are research infrastructure; they are not a demonstration of 1,000 fully autonomous real-world jobs.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "sotopia",
+      "title": "SOTOPIA: Interactive Evaluation for Social Intelligence in Language Agents",
+      "publisher": "SOTOPIA authors / ICLR",
+      "date": "2023-10-18",
+      "url": "https://arxiv.org/abs/2310.11667",
+      "domains": [
+        "social"
+      ],
+      "observation": "Evaluates goal-directed social interactions in simulated situations, revealing variation across social dimensions and difficult scenarios.",
+      "limitation": "Simulated role play cannot establish real-world care, acceptance, trust or sustained relationship competence.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "surgical-dissection",
+      "title": "Autonomous Dissection in Robotic Cholecystectomy",
+      "publisher": "Oh, Borgioli, Žefran, Valle and Giulianotti",
+      "date": "2025-03-01",
+      "url": "https://arxiv.org/abs/2503.00666",
+      "domains": [
+        "dexterity",
+        "perception",
+        "safety"
+      ],
+      "observation": "Combines visual segmentation, grasping, tissue tension and dissection in an autonomous architecture evaluated on ex vivo porcine livers.",
+      "limitation": "Ex vivo experimental dissection is not a complete autonomous operation or evidence of clinical approval and safety across patients.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "nist-rmf",
+      "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+      "publisher": "National Institute of Standards and Technology",
+      "date": "2023-01-26",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+      "domains": [
+        "safety"
+      ],
+      "observation": "Defines a risk-management framework treating validity, reliability, safety and governance in the context of deployment.",
+      "limitation": "This voluntary framework is neither an automation prediction nor a guarantee that a system meets a specific regulatory requirement.",
+      "type": "official framework",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "alab",
+      "title": "An autonomous laboratory for the accelerated synthesis of inorganic materials",
+      "publisher": "Szymanski et al. / Nature",
+      "date": "2023-11-29",
+      "url": "https://www.nature.com/articles/s41586-023-06734-w",
+      "domains": [
+        "discovery",
+        "dexterity"
+      ],
+      "observation": "Integrates robotic synthesis, computational materials data, machine learning and experiment selection into a bounded closed-loop laboratory.",
+      "limitation": "Read with the 2026 correction. Original novelty and success claims were revised; the system’s targets and equipment are domain-specific.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "alab-correction",
+      "title": "Author Correction: An autonomous laboratory for the accelerated synthesis of inorganic materials",
+      "publisher": "Szymanski et al. / Nature",
+      "date": "2026-01-19",
+      "url": "https://www.nature.com/articles/s41586-025-09992-y",
+      "domains": [
+        "discovery",
+        "safety"
+      ],
+      "observation": "Corrects material-identification and novelty claims; the updated paper reports 36 of 57 targets successfully synthesized.",
+      "limitation": "Novelty relative to a prediction platform is not necessarily novelty to science. This correction illustrates the need for independent validation.",
+      "type": "author correction",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "gnome",
+      "title": "Scaling deep learning for materials discovery",
+      "publisher": "Merchant et al. / Nature",
+      "date": "2023-11-29",
+      "url": "https://www.nature.com/articles/s41586-023-06735-9",
+      "domains": [
+        "discovery",
+        "frontier"
+      ],
+      "observation": "Uses graph neural networks and first-principles calculations to expand candidate stable crystal structures and study generalization in materials modeling.",
+      "limitation": "Predicted thermodynamic stability is not proof of synthesizability, application suitability, manufacturing feasibility or a date for a new invention.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "robot-chemistry",
+      "title": "Autonomous mobile robots for exploratory synthetic chemistry",
+      "publisher": "Dai et al. / Nature",
+      "date": "2024-11-06",
+      "url": "https://www.nature.com/articles/s41586-024-08173-7",
+      "domains": [
+        "discovery",
+        "mobility",
+        "dexterity"
+      ],
+      "observation": "Integrates mobile robots, synthesis and multiple analytical instruments into exploratory chemistry workflows with automated decisions.",
+      "limitation": "The decision rules and criteria were designed by domain experts for selected chemistry. This is not unrestricted scientific autonomy.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "robot-exposure",
+      "title": "What work can robots do?",
+      "publisher": "Anthropic Economics",
+      "date": "2026-09-30",
+      "url": "https://www.anthropic.com/research/what-work-can-robots-do",
+      "domains": [
+        "perception",
+        "dexterity",
+        "mobility",
+        "hardware",
+        "safety"
+      ],
+      "observation": "Constructs a robotics task-exposure index and separates capability in limited settings from cost competitiveness, preferences and regulation.",
+      "limitation": "Industry research relies in part on language-model task ratings and economic assumptions. Exposure or bounded capability is not full-job automation; its cost extrapolations are conditional.",
+      "type": "industry research report",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "vision-economics",
+      "title": "Beyond AI Exposure: Which Tasks are Cost-Effective to Automate with Computer Vision?",
+      "publisher": "Svanberg et al. / MIT Initiative on the Digital Economy",
+      "date": "2024-01",
+      "url": "https://ide.mit.edu/wp-content/uploads/2024/01/Beyond-AI-Exposure-Which-Tasks-are-Cost-Effective-to-Automate-with-Computer-Vision.pdf",
+      "domains": [
+        "deployment",
+        "perception"
+      ],
+      "observation": "Models technical requirements and the economic decision to deploy computer vision; scale and system costs change which exposed tasks are economical.",
+      "limitation": "This cost model concerns selected vision tasks at its study assumptions. It does not estimate all forms of AI, future hardware or full occupational replacement.",
+      "type": "working paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "productivity-paradox",
+      "title": "Artificial Intelligence and the Modern Productivity Paradox: A Clash of Expectations and Statistics",
+      "publisher": "Brynjolfsson, Rock and Syverson / NBER",
+      "date": "2017-11",
+      "url": "https://www.nber.org/papers/w24001",
+      "domains": [
+        "deployment"
+      ],
+      "observation": "Explains how complementary innovation, intangible investment and organizational change can delay measured productivity effects of new technologies.",
+      "limitation": "The mechanism supports distinguishing capability from implementation. It does not imply a fixed delay for every occupation.",
+      "type": "working paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "diffusion-history",
+      "title": "An Exploration of Technology Diffusion",
+      "publisher": "Comin and Hobijn / American Economic Review",
+      "date": "2010-12",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/aer.100.5.2031",
+      "domains": [
+        "deployment",
+        "history"
+      ],
+      "observation": "Studies 15 technologies across 166 countries over two centuries and finds large variation in adoption lags, with faster adoption for newer technologies.",
+      "limitation": "Country-level historical adoption is not a direct measure of full-job automation. The sample’s average lag must not be applied as a universal forecast.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "progress-history",
+      "title": "How predictable is technological progress?",
+      "publisher": "Farmer and Lafond / Research Policy",
+      "date": "2015-02-18",
+      "url": "https://arxiv.org/abs/1502.05274",
+      "domains": [
+        "history",
+        "hardware",
+        "discovery",
+        "frontier",
+        "unknown"
+      ],
+      "observation": "Uses historical technology cost data and hindcasting to study probabilistic forecasts and how errors grow with the forecast horizon.",
+      "limitation": "Cost improvements for established technologies are not forecasts of first discovery or proof of a universal progress rate. Published in Research Policy in 2016.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "progress-regularities",
+      "title": "Statistical Basis for Predicting Technological Progress",
+      "publisher": "Nagy, Farmer, Bui and Trancik / PLOS ONE",
+      "date": "2013-02-28",
+      "url": "https://doi.org/10.1371/journal.pone.0052669",
+      "domains": [
+        "history",
+        "hardware",
+        "discovery"
+      ],
+      "observation": "Compares empirical laws for technology unit costs using historical data and out-of-sample forecast errors across multiple technologies.",
+      "limitation": "Rates vary across technologies, forecast errors grow, and a single cost measure omits other performance dimensions. It does not date unspecified breakthroughs.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "ideas-productivity",
+      "title": "Are Ideas Getting Harder to Find?",
+      "publisher": "Bloom, Jones, Van Reenen and Webb / American Economic Review",
+      "date": "2020-04",
+      "url": "https://www.aeaweb.org/articles?id=10.1257/aer.20180338",
+      "domains": [
+        "history",
+        "discovery",
+        "frontier"
+      ],
+      "observation": "Finds rising research effort and declining research productivity in multiple historical industries, products and firms.",
+      "limitation": "These historical findings challenge effortless exponential extrapolation but do not establish inevitable stagnation or predict the effect of future AI researchers.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "expert-survey",
+      "title": "Thousands of AI Authors on the Future of AI",
+      "publisher": "Grace et al. / Journal of Artificial Intelligence Research",
+      "date": "2024-01-05",
+      "url": "https://arxiv.org/abs/2401.02843",
+      "domains": [
+        "reasoning",
+        "social",
+        "creative",
+        "discovery",
+        "frontier",
+        "unknown"
+      ],
+      "observation": "Surveys 2,778 AI researchers. Aggregate answers distinguish machines outperforming humans on all tasks (50% by 2047) from all occupations becoming fully automatable (50% by 2116).",
+      "limitation": "These are subjective survey aggregates under different question framings, not calibrated forecasts or occupation-specific dates. Later journal version published in 2025.",
+      "type": "research paper",
+      "forecastUse": "Supports the capability distinction or uncertainty; does not supply the site’s milestone year."
+    },
+    {
+      "id": "battery-progress",
+      "title": "Re-examining rates of lithium-ion battery technology improvement and cost decline",
+      "publisher": "Ziegler and Trancik / Energy & Environmental Science",
+      "date": "2021-03-23",
+      "url": "https://pubs.rsc.org/en/content/articlehtml/2021/ee/d0ee02681f",
+      "type": "research paper",
+      "domains": [
+        "hardware",
+        "history"
+      ],
+      "observation": "Harmonizes historical battery price, production, research and performance data; estimated improvement rates depend on whether energy density is included in the service measure.",
+      "limitation": "Established battery cost and energy-density trends do not predict a new battery chemistry, robot reliability, or a universal date for embodied automation.",
+      "forecastUse": "Motivates separate hardware and economic assumptions and sensitivity to the chosen progress metric."
+    },
+    {
+      "id": "alphafold3",
+      "title": "Accurate structure prediction of biomolecular interactions with AlphaFold 3",
+      "publisher": "Abramson et al. / Nature",
+      "date": "2024-05-08",
+      "url": "https://www.nature.com/articles/s41586-024-07487-w",
+      "type": "research paper",
+      "domains": [
+        "discovery"
+      ],
+      "observation": "Predicts structures of complexes containing proteins, nucleic acids, small molecules and other molecular entities, with benchmark improvements over specialized tools.",
+      "limitation": "Structure prediction is a bounded scientific capability. It does not establish experimental validation, safe therapies or complete autonomous biomedical research.",
+      "forecastUse": "Shows scientific sub-capabilities can improve substantially while downstream validation remains a separate requirement."
+    },
+    {
+      "id": "ilo-exposure-2025",
+      "title": "Generative AI and jobs: A 2025 update",
+      "publisher": "International Labour Organization",
+      "date": "2025-05-20",
+      "url": "https://www.ilo.org/publications/generative-ai-and-jobs-2025-update",
+      "type": "official research brief",
+      "domains": [
+        "employment context"
+      ],
+      "observation": "Updates occupational GenAI exposure using task-level information, expert input and AI assessments, distinguishing different exposure gradients.",
+      "limitation": "Exposure measures potential technological effects; it is not a forecast of full occupational automation or a date when a job disappears.",
+      "forecastUse": "Context for interpreting occupational task exposure only; it supplies none of the model’s numerical milestone parameters."
+    },
+    {
+      "id": "bls-projection-methods",
+      "title": "Employment Projections Frequently Asked Questions",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "date": "2026-10-30",
+      "dateType": "reviewed; not publication date",
+      "url": "https://www.bls.gov/emp/frequently-asked-questions.htm",
+      "type": "official methodology FAQ",
+      "domains": [
+        "employment context"
+      ],
+      "observation": "Explains national employment projections with a ten-year horizon and how technology can affect productivity, occupational staffing and demand.",
+      "limitation": "Employment projections and AI exposure categories are not full-automation dates. This source is an evolving FAQ; the listed date is the review date, not a claimed publication date.",
+      "forecastUse": "Context separating labor-demand projections from technical automation scenarios; no numerical milestone parameters are taken from this FAQ."
+    }
+  ]
+}

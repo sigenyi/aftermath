@@ -1,32 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {installCatalog,catalog} from './dist/catalog.js';
 import {searchOccupations,hasExactOccupation} from './dist/search.js';
+installCatalog(JSON.parse(await readFile(new URL('./dist/data/catalog-index.json',import.meta.url),'utf8')));
+test('full-catalog search finds occupations beyond original twelve',()=>{for(const query of ['actuary','archaeologist','plumber','welder','veterinarian','librarian','geologist'])assert.ok(searchOccupations(query).length>0,query);});
+test('official aliases and source codes work in autocomplete',()=>{assert.ok(searchOccupations('15-1252.00').some(r=>r.sourceCode==='15-1252.00'));assert.ok(searchOccupations('nurse').some(r=>/nurs/i.test(r.title)));assert.equal(hasExactOccupation('Registered Nurses'),true);});
+test('multiword queries match tokens without requiring exact order',()=>{assert.ok(searchOccupations('systems computer').length>0);});
+test('unknown or markup input does not invent a source match',()=>{for(const query of ['orbital memory gardener','<script>alert(1)</script>','不存在的新职业'])assert.equal(searchOccupations(query).length,0);});
+test('bounded results preserve stable, unique source identities',()=>{for(const query of ['', 'manager','engineer','research']){const results=searchOccupations(query,6);assert.ok(results.length<=6);assert.equal(new Set(results.map(r=>r.id)).size,results.length);assert.ok(results.every(r=>catalog.some(original=>original.id===r.id)));}});
 
-test('title prefixes and occupation aliases produce available choices',()=>{
-  assert.equal(searchOccupations('sof')[0].id,'software');
-  assert.equal(searchOccupations('nurse')[0].id,'nursing');
-  assert.equal(searchOccupations('RN')[0].id,'nursing');
-  assert.equal(searchOccupations('cpa')[0].id,'accounting');
-});
-test('exact terms outrank partial terms and casing/spacing are normalized',()=>{
-  assert.equal(searchOccupations('  gRaPhIc DeSiGn  ')[0].id,'design');
-  assert.equal(hasExactOccupation('Software Engineer'),true);
-  assert.equal(hasExactOccupation('sof'),false);
-  assert.equal(hasExactOccupation(''),false);
-});
-test('blank input offers a bounded starter list and result limits are respected',()=>{
-  assert.equal(searchOccupations('').length,6);
-  assert.equal(searchOccupations('  ',3).length,3);
-  assert.ok(searchOccupations('a',2).length<=2);
-});
-test('unknown, mixed, non-Latin, and markup inputs do not fabricate matches',()=>{
-  for(const query of ['Orbital garden curator','nurse and chef','医生','<script>alert(1)</script>']){
-    assert.equal(searchOccupations(query).length,0);
-    assert.equal(hasExactOccupation(query),false);
-  }
-});
-test('search results are unique catalog roles',()=>{
-  const results=searchOccupations('developer');
-  assert.equal(results.length,1);
-  assert.equal(new Set(results.map(role=>role.id)).size,results.length);
+test('canonical exact title is the first suggestion ahead of aliases',()=>{
+  assert.equal(searchOccupations('data scientist')[0].title.toLowerCase(),'data scientist');
 });

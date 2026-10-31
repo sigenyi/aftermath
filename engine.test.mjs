@@ -1,94 +1,52 @@
-import {test} from 'node:test';
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-const code = await readFile(new URL('./dist/engine.js', import.meta.url), 'utf8');
-const {catalog, sources, resolveRole, buildReport} = await import(`data:text/javascript;base64,${Buffer.from(code).toString('base64')}`);
-const report = (extra = {}) => buildReport({title: 'Software Developer', tasks: catalog[0].tasks, assessmentYear: 2026, ...extra});
+import {installCatalog,loadOccupation,catalog} from './dist/catalog.js';
+import {buildReport,resolveRole} from './dist/engine.js';
+import {prepareOccupation} from './dist/profile.js';
+const read=async file=>JSON.parse(await readFile(new URL(file,import.meta.url),'utf8'));
+const index=await read('./dist/data/catalog-index.json'),evidence=await read('./dist/data/evidence.json');
+installCatalog(index,evidence);
+const localRead=path=>read(`./dist/${path}`);
+test('complete source index retains all three source populations and distinct IDs',()=>{
+  assert.equal(catalog.length,index.metadata.totalRecords);assert.equal(new Set(catalog.map(r=>r.id)).size,catalog.length);
+  assert.equal(catalog.filter(r=>r.source==='onet').length,1016);assert.equal(catalog.filter(r=>r.source==='esco').length,3039);assert.equal(catalog.filter(r=>r.source==='isco').length,436);
+});
+test('known title and code resolve without forcing unknown jobs into nearest records',()=>{
+  assert.equal(resolveRole('15-1252.00').role.sourceCode,'15-1252.00');assert.equal(resolveRole('Registered Nurses').role.sourceCode,'29-1141.00');assert.equal(resolveRole('Orbital memory gardener').matched,false);
+});
+test('detail loading retains full source profile and returns independent copies',async()=>{
+  const first=await loadOccupation('onet:29-1141.00',localRead),second=await loadOccupation('onet:29-1141.00',localRead);assert.ok(first.tasks.length>4);assert.ok(Object.keys(first.features).length>0);first.tasks[0].label='changed';assert.notEqual(second.tasks[0].label,'changed');
+});
+test('description-only records are explicit proxies, not invented duty lists',()=>{
+  const profile=prepareOccupation({id:'isco:0000',source:'isco',title:'Broad classification',tasks:[]});assert.equal(profile.tasks.length,1);assert.equal(profile.tasks[0].type,'description-proxy');
+});
+test('optional skills do not silently become mandatory and Unicode duties remain distinct',()=>{
+  const profile=prepareOccupation({id:'custom:one',tasks:[{label:'修理电线'},{label:'检查设备'},{label:'检查设备'},{label:'Optional activity',type:'optional-skill'}]});assert.equal(profile.tasks.length,2);
+});
+test('report joins real references and computes an integer single-year endpoint',async()=>{
+  const occupation=await loadOccupation('onet:47-2111.00',localRead),profile=prepareOccupation(occupation);
+  const report=buildReport({title:occupation.title,occupation,tasks:profile.tasks,assessmentYear:2026});assert.equal(report.fullAutomation.label,String(report.baselineYear));assert.ok(Number.isInteger(report.baselineYear));assert.ok(report.sources.length>3);assert.equal(report.sourceRecord.url,occupation.sourceUrl);assert.equal(report.tasks.length,profile.tasks.length);assert.ok(report.capabilities.length>1);
+});
+test('custom profiles keep all requirements and do not inherit false occupational provenance',()=>{
+  const report=buildReport({title:'Hybrid role',tasks:[{label:'Write software and resolve failures'},{label:'Repair delicate underwater machinery'}],assessmentYear:2026});assert.equal(report.tasks.length,2);assert.equal(report.sourceRecord,null);assert.equal(report.source,'custom');assert.ok(report.capabilities.some(c=>c.id==='dexterity'));assert.ok(report.capabilities.some(c=>c.id==='digital'));
+});
+test('empty work profile cannot fabricate a forecast',()=>{assert.throws(()=>buildReport({title:'Unknown',tasks:[]}),/at least one/);});
+test('missing detail records fail with a useful error',async()=>{await assert.rejects(loadOccupation('not-a-real-id',localRead),/not in the current catalog/);});
+test('replacing source duties does not keep unrelated original physical demands',async()=>{
+  const occupation=await loadOccupation('onet:47-2111.00',localRead),tasks=[{id:'added-1',label:'Enter invoices in a spreadsheet',type:'custom-task'}];
+  const edited=buildReport({title:occupation.title,occupation,tasks,assessmentYear:2026}),custom=buildReport({title:'Data entry',tasks,assessmentYear:2026});
+  assert.equal(edited.profileCustomized,true);assert.equal(edited.baselineYear,custom.baselineYear);assert.deepEqual(edited.capabilities.map(c=>c.id),custom.capabilities.map(c=>c.id));
+});
 
-test('curated data has unique IDs, provenance, and technology dependencies', () => {
-  assert.equal(catalog.length, 12);
-  const ids = catalog.flatMap(r => r.tasks.map(t => t.id));
-  assert.equal(new Set(ids).size, ids.length);
-  for (const task of catalog.flatMap(r => r.tasks)) {
-    assert.ok(task.frontierIds.length > 0);
-    assert.equal('human' in task, false);
-    for (const id of task.sourceIds) assert.ok(sources.some(s => s.id === id));
-  }
+test('canonical title outranks aliases and ambiguous aliases require a choice',()=>{
+  assert.equal(resolveRole('data scientist').role.title.toLowerCase(),'data scientist');
+  assert.equal(resolveRole('doctor').ambiguous,true);
 });
-test('aliases and seniority match without mutating the catalog', () => {
-  const result = resolveRole('Senior Software Engineer');
-  assert.equal(result.role.id, 'software');
-  result.role.tasks[0].label = 'modified';
-  assert.notEqual(catalog[0].tasks[0].label, 'modified');
-});
-test('unknown and hybrid titles are not forced into one occupation', () => {
-  assert.equal(resolveRole('Quantum garden curator').matched, false);
-  assert.equal(resolveRole('chef and software developer').matched, false);
-  assert.equal(resolveRole('teacherpreneur').matched, false);
-});
-test('every known role has a speculative complete-automation horizon', () => {
-  for (const role of catalog) {
-    const r = report({title: role.title, tasks: role.tasks});
-    assert.ok(r.fullAutomation.earliestYear > 2026);
-    assert.ok(r.fullAutomation.latestYear > r.fullAutomation.earliestYear);
-    assert.match(r.confidence, /not a validated prediction/);
-    assert.ok(r.tasks.every(t => t.automationWindow && t.requirements));
-  }
-});
-test('custom or edited tasks receive broad generic assumptions without borrowed evidence', () => {
-  const original = catalog[0].tasks[0];
-  const r = report({tasks: [{...original, label: 'Care for a newborn'}, {label: 'Read minds', exposure: 'high'}]});
-  assert.equal(r.counts.unassessed, 2);
-  assert.equal(r.fullAutomation.openEnded, true);
-  assert.ok(r.fullAutomation.yearsMax >= 100);
-  assert.ok(r.tasks.every(t => t.sourceIds.length === 0));
-  assert.equal(r.frontiers[0].id, 'unclassified');
-});
-test('deselection and deduplication determine the actual report', () => {
-  const [one, two] = catalog[0].tasks;
-  const r = report({tasks: [one, one, {...two, selected: false}]});
-  assert.equal(r.tasks.length, 1);
-  assert.equal(r.counts.high, 1);
-});
-test('distinct non-Latin and symbol-only tasks survive deduplication', () => {
-  const r = report({tasks: [{label: '修理电线'}, {label: '检查设备'}, {label: '修理电线'}, {label: '🔧'}, {label: '🔬'}]});
-  assert.deepEqual(r.tasks.map(t => t.label), ['修理电线', '检查设备', '🔧', '🔬']);
-  assert.equal(r.counts.unassessed, 4);
-  assert.equal(r.fullAutomation.openEnded, true);
-});
-test('scenario changes alter horizons monotonically while preserving source data', () => {
-  const slow = report({scenario: 'conservative'});
-  const baseline = report();
-  const fast = report({scenario: 'accelerated'});
-  assert.ok(fast.fullAutomation.yearsMax < baseline.fullAutomation.yearsMax);
-  assert.ok(baseline.fullAutomation.yearsMax < slow.fullAutomation.yearsMax);
-  assert.deepEqual(slow.tasks.map(t => t.sourceIds), fast.tasks.map(t => t.sourceIds));
-  assert.equal(report({scenario: 'toString'}).scenario, 'central');
-});
-test('single-front and multi-front occupations have distinct dependency graphs', () => {
-  assert.equal(report().frontiers.length, 1);
-  const nurse = catalog.find(r => r.id === 'nursing');
-  const r = report({tasks: nurse.tasks});
-  assert.ok(r.frontiers.length > 2);
-  assert.ok(r.tasks.some(t => t.frontierIds.length > 1));
-  assert.equal(r.fullAutomation.yearsMax, Math.max(...r.frontiers.map(f => f.yearsMax)) + r.fullAutomation.integrationYears.max);
-  assert.ok(r.fullAutomation.yearsMax < r.frontiers.reduce((sum,f) => sum + f.yearsMax, 0));
-  assert.ok(r.deploymentAssumptions.length > 0);
-});
-test('removing a bottleneck task cannot delay complete automation', () => {
-  for (const role of catalog) {
-    const full = report({tasks: role.tasks});
-    const subset = report({tasks: role.tasks.slice(0, 1)});
-    assert.ok(subset.fullAutomation.yearsMax <= full.fullAutomation.yearsMax);
-  }
-});
-test('empty input still returns an explicit generic scenario', () => {
-  const r = report({tasks: []});
-  assert.ok(r.fullAutomation.openEnded);
-  assert.ok(r.fullAutomation.yearsMax >= 100);
-  assert.equal(r.frontiers[0].id, 'unclassified');
-});
-test('non-US settings explicitly flag absent local adjustment', () => {
-  const r = report({location: 'Canada'});
-  assert.ok(r.assumptions.some(a => a.includes('does not change the speculative model')));
+
+test('adding duties preserves source-wide demands and cannot bring automation forward',async()=>{
+  const occupation=await loadOccupation('onet:11-1021.00',localRead),tasks=prepareOccupation(occupation).tasks;
+  const base=buildReport({title:occupation.title,occupation,tasks,assessmentYear:2026});
+  const expanded=buildReport({title:occupation.title,occupation,tasks:[...tasks,{id:'added-one',label:'Enter invoices in a spreadsheet'}],assessmentYear:2026});
+  assert.equal(expanded.profileCustomized,true);assert.equal(expanded.sourceRatingsOmitted,false);assert.ok(expanded.baselineYear>=base.baselineYear);
 });

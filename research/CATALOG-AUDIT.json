@@ -1,0 +1,35 @@
+{
+  "sourceCounts": {
+    "onet": 1016,
+    "esco": 3039,
+    "isco": 436
+  },
+  "rawRequirementCount": 86438,
+  "selectedRequirementCount": 86967,
+  "descriptionOnlyCount": 529,
+  "skillProfileCount": 3039,
+  "optionalSkillCount": 58451,
+  "totalRecords": 4491,
+  "computedScenarios": 13473,
+  "aliasCount": 88960,
+  "researchReferences": 32,
+  "baselineYearMin": 2035,
+  "baselineYearMax": 2097,
+  "capabilityCounts": {
+    "unknown": 2893,
+    "safety": 1687,
+    "reasoning": 4188,
+    "social": 2992,
+    "dexterity": 2631,
+    "creative": 1077,
+    "perception": 3412,
+    "digital": 2989,
+    "mobility": 947,
+    "discovery": 358,
+    "hardware": 616
+  },
+  "rolesWithUnmappedRequirements": 2893,
+  "rolesWithoutUnmappedRequirements": 1598,
+  "failures": [],
+  "validation": "Structural and consistency audit only; not empirical forecast accuracy."
+}

@@ -1,142 +1,138 @@
 # AFTERMATH
 
-A cinematic, Terminator-inspired explorer of **full job automation**. A dark, full-screen scene and one search bar lead directly to an occupation’s possible automation timeline.
+A cinematic explorer of **full workflow automation**: search for an occupation, inspect the technologies it requires, and reveal a conditional automation year. The interface uses a dark machine-inspired scene, live search suggestions, a staged red-eye animation and a prominent red result.
 
-This is a working browser prototype with original branding and a generated photorealistic endoskeleton image. It is not affiliated with the Terminator franchise. Its dates are **speculative scenarios based on authored assumptions**, not validated forecasts, source-derived predictions, or individual layoff estimates.
+**Live site:** [sigenyi.github.io/aftermath](https://sigenyi.github.io/aftermath/) · **Research cutoff:** October 30, 2026 · **Model:** 1.0.0
 
-## What is implemented
+The occupational catalog is sourced and reproducible. The future years are **uncalibrated model scenarios**, not published occupational deadlines, measured probabilities or individual layoff forecasts. A single displayed year does not imply one-year accuracy. The model permits horizons beyond a century; it does not establish when an undiscovered capability will become feasible.
 
-- A simplified cinematic homepage with one search field and the locally served `dist/assets/endoskeleton-cinema.webp` backdrop.
-- Live occupation suggestions as you type, matching titles and aliases from a starter catalog of 12 occupations and 49 tasks.
-- An accessible combobox: arrow-key navigation, Enter to choose, Escape to dismiss, visible focus, and screen-reader announcements. Suggestions adapt to available viewport space.
-- Immediate results for a known occupation. There is no mandatory task-confirmation step.
-- Optional task editing, adding, and removal. Unfamiliar or hybrid roles ask for their actual tasks before showing a broad estimate.
-- A technology dependency model: some occupations use one discovery front, while others require several fronts to converge.
-- Full-automation horizons for every selected workflow, including broad, open-ended assumptions for custom work.
-- Three scenario controls labeled **Faster**, **Baseline**, and **Slower**.
-- Two result tabs—**What needs to happen** and **The tasks**—with **Sources & assumptions** collapsed until requested.
-- A downloadable plain-text report, an optional **How it works** dialog, and reduced-motion support.
+## Coverage
 
-There is no live AI service, evidence retrieval, database, account system, location selector, or custom-task classifier. Known titles resolve against local aliases. Unknown work uses a generic scenario until someone maps its requirements. The generated artwork is a static project asset; viewing or using the website does not call an image-generation service.
+The catalog contains **4,491 overlapping source records**, with 88,960 alternative titles. They are not 4,491 deduplicated worldwide jobs: the three classifications describe overlapping work at different levels of detail.
 
-## Hosting
+| Source | Edition | Records | Imported work evidence |
+| --- | --- | ---: | --- |
+| O*NET | 31.0, August 2026 | 1,016 | All 18,838 task statements for 923 occupations; 93 records have descriptions only |
+| ESCO | 1.2.1, December 2025, English | 3,039 | 67,600 essential skill/knowledge relationships, with English descriptions and aliases |
+| ISCO | ISCO-08 | 436 | Every unit-group code and title, with links to the source and mapped ESCO children |
 
-The public site is deployed from this repository to GitHub Pages: https://sigenyi.github.io/aftermath/
+The **86,438 imported task/essential-skill statements** retain their source identifiers. ESCO skills are explicitly treated as proxies for work, not observed task statements. Another **58,451 optional ESCO relationships** remain in a separate field and are excluded from default requirements. O*NET's proposed emerging tasks are also retained separately from established task statements.
 
-Pushing to `main` runs the syntax checks, model tests, and search tests, then publishes only `dist/`. The website has no OpenAI runtime, authentication, API, or hosting dependency. The previous Sites configuration has been removed from this checkout; removal of the old hosted project is a separate provider-side operation.
+O*NET scalar ratings describe occupational demands and conditions; they are not automation scores. Missing or suppressed ratings are not treated as measured zeros. ISCO categories are broad groups, and their older copyrighted duty definitions are linked rather than republished. Consequently, **529 records** use a labeled description or classification proxy. Ten ISCO groups have no ESCO child in this release. All source records remain searchable, including those with limited evidence.
 
-## Run locally
+See [O*NET provenance](research/ONET-PROVENANCE.md), [ESCO/ISCO provenance](research/ESCO-ISCO-PROVENANCE.md) and the generated [catalog audit](research/CATALOG-AUDIT.md) for editions, licenses, hashes, exact counts and omissions.
 
-Requirements: Python 3 to serve the site. Node.js 20 or later is recommended for the checks and tests. No dependency installation or compilation is needed.
+## Experience
 
-From this project directory:
+- Live title, alias and classification-code search, with keyboard navigation and source labels. Ambiguous aliases require a choice instead of silently selecting unrelated work.
+- Known occupations load their detailed requirements on demand. Custom and hybrid work can be described through the task editor; unfamiliar titles are not forced into a preset.
+- A cancellable cinematic reveal with a **Show result** shortcut. Reduced-motion preferences bypass the animated delay. The animation describes use of downloaded data, not a live literature search.
+- A red conditional year, **Faster / Baseline / Slower** sensitivity controls, and views for required breakthroughs, individual requirements and research.
+- Optional task editing and plain-text report export. Altering the original scope removes unrelated occupation-wide ratings; adding requirements while retaining the entire original scope preserves those ratings.
+
+The result concerns every requirement in the **selected profile**, including its modeled reliability needs. Removing a duty narrows that scope. Full automation here does not mean simultaneous adoption by every employer or the disappearance of all work sharing a title.
+
+## How the model works
+
+The model maps task and skill text to capability requirements using explicit, reproducible rules. Selected O*NET ratings add occupation-level constraints. Sparse profiles may use a labeled broad classification prior. Each requirement keeps its source fields and gains mapping explanations, dependencies and a conditional milestone.
+
+The 12 modeled areas cover digital work, judgment, perception, dexterity, mobility, social interaction, creativity, scientific discovery, assurance, durable hardware, speculative scientific prerequisites and unresolved work. Some workflows need one area; others depend on several. Dependencies are explicit—for example, dexterity requires perception and scientific discovery requires judgment.
+
+For each required capability, the model uses its maximum demand across the selected workflow. With demand `r` between 0 and 1:
+
+```text
+capability year = max(assessment year,
+                      2026 + ceil((base years + difficulty years × r²)
+                                  × scenario factor))
+technical year  = latest required capability year
+result year     = technical year + integration allowance
+```
+
+Capabilities can progress in parallel. The slowest required capability sets the technical date; easier tasks cannot average it away. Integration adds an allowance for connecting systems, testing, infrastructure and deployment. Task-specific milestones use the task's own demands and dependencies, while occupation-wide ratings constrain the overall role.
+
+**Every future offset, demand weight, scenario factor and integration allowance is an authored assumption.** The equations have not been fitted to historical full-occupation automation outcomes. Faster and slower scenarios explore assumptions; they are not confidence bounds. The 2026 research snapshot does not refresh itself as the calendar advances.
+
+The current registry contains **32 references**: 30 research, technical-report and framework sources, plus ILO exposure research and BLS employment-projection context from the project foundations. It spans digital agents, robotics, social interaction, scientific work, safety, economics, historical technological progress and expert surveys. Entries distinguish observations from limitations and include publication dates and direct links. They inform the choice of requirements and constraints; they do not validate the model's precise years. This is a selected research corpus, not an exhaustive review of all papers or all human advances.
+
+Text matching remains provisional. Compound duties, jargon, unusual settings and unknown inventions can be missed or misclassified. The current audit identifies **2,893 source profiles with at least one explicitly unmapped requirement**. These requirements remain visible and receive a disclosed unresolved-requirement scenario; the model does not pretend to have researched their missing breakthroughs. Even mapped requirements have not all received independent expert review. Actual outcomes may be decades earlier or later, or never occur.
+
+The full equations, parameter table, evidence ledger and scientific limitations are in [MODEL-RESEARCH.md](research/MODEL-RESEARCH.md). The [project log](EMBARKMENT.md) records the expansion and its acceptance criteria.
+
+## Run and verify
+
+Use Python 3 for local serving and imports, and Node.js 20 or later for catalog generation and checks. No third-party package installation or application compilation is required.
 
 ```sh
 npm start
 ```
 
-Or run the equivalent server directly:
+Open [localhost:4173](http://localhost:4173). Serve the site rather than opening `index.html` directly: it uses JavaScript modules and same-origin data requests. Stop the server with Ctrl+C.
+
+After changing imported data, research references or forecast logic, regenerate the browser assets and audit:
 
 ```sh
-python3 -m http.server 4173 --directory dist
-```
-
-Open [http://localhost:4173](http://localhost:4173). Use a local server rather than opening `index.html` as a file, because the app uses JavaScript modules. Stop the server with Ctrl+C.
-
-```sh
+npm run build:catalog
 npm test
 npm run check
 ```
 
-The model tests cover source IDs, title matching, generic custom scenarios, task selection, Unicode-safe deduplication, monotonic scenario changes, single-front versus multi-front dependencies, and the bottleneck calculation. `search.test.mjs` covers autocomplete prefixes, aliases, normalization, result limits, uniqueness, and unknown inputs. Syntax checks validate all three JavaScript modules.
+The catalog build creates a compact search index, detail chunks and a forecast audit snapshot. It calculates all three scenarios for all 4,491 records—**13,473 calculations**—and checks identifiers, reference resolution, requirement preservation, finite years, scenario ordering and dependency consistency. The tests also cover search, custom profiles, profile edits, sparse inputs, context-sensitive mapping, task-local milestones and horizons beyond 100 years. These checks establish software consistency, not forecast accuracy. Current mapping diagnostics are recorded in [CATALOG-AUDIT.json](research/CATALOG-AUDIT.json).
 
-Run just the autocomplete tests with `node --test search.test.mjs`.
+## Reproduce source imports
+
+The importers use Python's standard library and official public sources. Normal runs use completed cached downloads; importing for the first time requires network access.
+
+```sh
+python3 scripts/import-onet.py
+python3 scripts/import-esco.py
+npm run build:catalog
+npm test
+npm run check
+```
+
+O*NET supports `--offline` to require cached input and `--refresh` to download the pinned edition again. Its source checksums must match the reviewed lock. ESCO supports `--workers 1` through `--workers 4` to control download concurrency and pins every API page to version 1.2.1. The ESCO importer also produces the ISCO code/title catalog from the official workbook.
+
+Raw input stays in the ignored `work/onet/` and `work/esco/` caches. The versioned source JSON under `dist/data/` and generated browser assets are checked into the repository. Review changed source editions, licenses, coverage and hashes before updating them. Keep essential skills, optional skills, source duties and inferred requirements distinguishable; do not add a job-specific year in place of a requirement profile.
 
 ## Architecture
 
-The deployable site is the `dist/` directory, which contains authored static files rather than generated build output:
+The site is plain HTML, CSS and JavaScript. `dist/` contains both authored application files and generated data assets.
 
-| File | Responsibility |
+| File or directory | Responsibility |
 | --- | --- |
-| `dist/index.html` | Single-screen search experience and dialog containers |
-| `dist/styles.css` | Responsive visual design, interaction states, and motion preferences |
-| `dist/app.js` | Accessible autocomplete, browser state, task editor, report views, scenario selection, and export |
-| `dist/search.js` | Pure title/alias ranking and exact-match checks for suggestions |
-| `dist/engine.js` | Occupations, task mapping, source metadata, assumptions, and pure report calculations |
-| `dist/assets/endoskeleton-cinema.webp` | Generated photorealistic cinematic backdrop, served locally |
-| `dist/assets/favicon.svg` | Site favicon |
-| `engine.test.mjs` | Node-based model tests |
-| `search.test.mjs` | Node-based autocomplete tests |
-| `.github/workflows/pages.yml` | GitHub Pages deployment from the repository |
+| `dist/index.html`, `dist/styles.css` | Cinematic presentation, responsive layout, dialogs and motion preferences |
+| `dist/app.js` | Accessible search, reveal, task editor, reports, scenarios and export |
+| `dist/search.js` | Title/alias/code ranking and exact-match helpers |
+| `dist/catalog.js` | Initial catalog/evidence loading, title resolution and cached detail-chunk requests |
+| `dist/profile.js` | Default requirement selection and explicit sparse-profile proxies |
+| `dist/forecast.js` | Capability rules, dependencies, source-rating constraints and conditional calculations |
+| `dist/engine.js` | Report assembly, source attribution and customized-profile handling |
+| `dist/data/{onet,esco,isco}.json` | Complete imported source records and provenance metadata |
+| `dist/data/catalog-index.json`, `dist/data/occupations/` | Search metadata and detailed occupation chunks loaded on demand |
+| `dist/data/evidence.json` | Versioned research registry with observations and limitations |
+| `dist/data/forecast-index.json` | Catalog-wide precomputed audit snapshot; interactive profiles are recalculated in the browser |
+| `scripts/` | Reproducible imports and catalog/audit generation |
+| `research/` | Source provenance, model specification and coverage audit |
+| `*.test.mjs` | Model, report and search checks using Node's test runner |
+| `dist/assets/` | Locally served artwork and favicon |
+| `.github/workflows/pages.yml` | Checks, catalog build and deployment to GitHub Pages |
 
-`searchOccupations(query)` ranks catalog titles and aliases, preferring exact and prefix matches. The UI presents up to six choices, including a custom-work option when appropriate. Selecting a known occupation or submitting an exact title opens its report immediately. Other input opens the task editor instead of forcing a catalog match.
+The browser first fetches the search index and research registry, then the chunk containing the chosen occupation. It does not require visitors to download every full source dataset before searching. Calculations use that local snapshot; there is no runtime AI model, live evidence retrieval service or application backend.
 
-`resolveRole(input)` and `buildReport({title, tasks, scenario, location})` run without network access. The current UI uses U.S. task references and does not offer location selection. Changing a known task’s wording invalidates its original mapping; the edited task receives a generic scenario rather than silently retaining unrelated assumptions.
+## Hosting and privacy
 
-## How the speculative model works
+The public website is deployed **only through this GitHub repository and GitHub Pages**. Pushing to `main` runs syntax checks, rebuilds the catalog from the committed source data and model, runs tests, then publishes `dist/`. The build does not download new occupational data or research. Generated indexes remain committed for local use and review; rebuild them when source data, evidence or forecast rules change.
 
-The endpoint is the complete **selected task profile** operating autonomously, including exceptions. It is not the date at which all employers adopt the technology. Leaving out duties changes the scope of the result.
+There is no OpenAI runtime, authentication, API or hosting dependency. The artwork is a static project asset, so viewing it does not call an image-generation service. This repository does not control deletion or retention of any historical project on another provider.
 
-The named discovery fronts are software intelligence, robotic dexterity, physical perception and navigation, social interaction, and reliability and safety. Custom work receives an unclassified placeholder; its actual fronts remain to be researched.
+Job titles, descriptions, edited requirements and reports stay in JavaScript memory in the browser. The application does not send these inputs to an AI service or application backend and does not store them in cookies, local storage or a database. Refreshing clears the active analysis; closing only the report dialog leaves its in-memory state available.
 
-Each known task has an authored baseline range in `horizonAssumptions` and a list of required fronts in `frontierMap`. A task depending on one front uses the full baseline range. For tasks depending on multiple fronts, `frontierDifficulty` applies explicit relative assumptions: software intelligence uses 0.65, physical navigation uses 0.85, and the other fronts use 1. These are modeling choices, not measured difficulty or probability estimates.
+GitHub may process ordinary hosting access logs, including data-asset requests. Google Fonts receives font-loading requests. Opening a reference visits its external publisher; exported reports are saved through the browser. Self-host the fonts to remove that font-service request.
 
-The model scales those ranges by the selected scenario, rounds them to whole years, and takes the longest requirement for each shared front. Fronts are assumed to develop in parallel. The complete workflow therefore uses:
+## Attribution
 
-```text
-technical horizon = MAX(required technology-front horizons)
-full automation horizon = technical horizon + integration allowance
-calendar window = assessment year + full automation horizon
-```
+This project includes information from the **O*NET 31.0 Database**, U.S. Department of Labor/Employment and Training Administration, used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). O*NET® is a trademark of USDOL/ETA. AFTERMATH restructures the data and adds independent model interpretations; USDOL/ETA has not approved, endorsed or tested those modifications.
 
-Minimum and maximum endpoints are computed separately. The model does **not** add all discovery timelines together. Its baseline integration allowance is 5–15 years, scaled by the same scenario multiplier.
+**This service uses the ESCO classification of the European Commission.** Its English data has been restructured as described in the [provenance record](research/ESCO-ISCO-PROVENANCE.md). ISCO-08 factual unit-group codes and titles are credited to the International Labour Organization; no CC BY license is asserted for the older duty definitions that are not redistributed here.
 
-| Scenario | Multiplier applied to task-front ranges and integration |
-| --- | ---: |
-| Faster (accelerated) | 0.55 |
-| Baseline (central) | 1.00 |
-| Slower (conservative) | 1.75 |
-
-Custom or edited tasks use a generic 20–100+ year technical baseline. With the central integration allowance, a wholly unclassified workflow receives a 25–115+ year horizon. The `+` means the upper end is open; it is not a maximum, confidence interval, or assurance that the necessary discoveries will occur.
-
-The result keeps a short uncertainty note beside the dates and puts further explanation in the collapsed **Sources & assumptions** section. The complete numeric assumptions remain visible in `dist/engine.js`. Sources support occupational descriptions and general research context; **none validate these dates, multipliers, or difficulty factors**. The model currently assumes that discoveries eventually occur. It does not estimate the probability of success, correlations between discoveries, or the risk that a capability is never achieved.
-
-Deployment conditions—affordable operation, data and hardware access, permissions, liability arrangements, and acceptance—are assumed satisfied rather than independently dated. The current interface uses U.S. references throughout. The engine retains a location parameter for future development, but changing it does not adjust the modeled dates.
-
-## Add or improve an occupation
-
-1. Add a stable occupation ID, display title, aliases, sector, O*NET code, and task descriptions to `catalog` in `dist/engine.js`.
-2. Check the occupational source and document what it actually supports. The existing helper links each task to its occupation source.
-3. Add a `[minimumYears, maximumYears]` baseline for every task to `horizonAssumptions`, keeping the same task order.
-4. Add the required front IDs for every task to `frontierMap`, again preserving order. Add a front definition and difficulty assumption if a new capability is needed.
-5. Review the generated complete-automation calculation and verify that source references are not presented as evidence for the authored years.
-6. Include useful everyday aliases. The autocomplete reads the catalog directly; no separate card, icon, or filter entry is needed.
-7. Update catalog-count expectations and add representative search tests, then run both test and syntax-check commands.
-
-Task IDs currently include their position in the occupation. Preserve order when possible; a production catalog should use permanent semantic task IDs and explicit data migrations.
-
-## Privacy
-
-Job titles, descriptions, edited tasks, and reports are held in JavaScript memory in the browser. The application does not transmit those inputs to an AI service or application backend and does not use cookies, local storage, or a database for them. Refreshing the page clears the active analysis; closing just the analysis dialog does not erase its in-memory state.
-
-The hosting provider may process ordinary access logs. Google Fonts receives font-loading requests. Clicking a reference opens an external website, and downloaded reports remain in the location selected by the browser. Self-host the fonts if third-party font requests are undesirable.
-
-## Reference foundations
-
-- [O*NET OnLine](https://www.onetonline.org/): the engine links directly to the profile for each supported occupation. These profiles ground the condensed task descriptions.
-- [ILO: Generative AI and jobs, a 2025 update](https://www.ilo.org/publications/generative-ai-and-jobs-2025-update), published 20 May 2025: background on task-level exposure research.
-- [BLS: Employment Projections FAQs](https://www.bls.gov/emp/frequently-asked-questions.htm): context on uncertainty and the distinction between exposure and employment projections.
-
-The source registry records review dates and explains the limits of each reference. These are static references, not a live evidence feed.
-
-## Next development steps
-
-- Replace the generic custom-task placeholder with a reviewed resolver that maps actual work to explicit capability requirements, including hybrid roles.
-- Add permitted evidence retrieval with dated snapshots, geographic scope, claim-level provenance, and explicit separation between observed capability and hypothetical development.
-- Research and calibrate discovery assumptions instead of treating the current hand-authored ranges as empirical estimates.
-- Model dependencies between fronts, integration complexity, possible stalled progress, and alternatives to the parallel-development assumption.
-- Separate technical feasibility, economic deployment, and widespread adoption into independently documented scenarios.
-- Add expert review, retrospective evaluation, and versioned reports before making claims about forecast accuracy.
-- Expand occupation coverage, international evidence, and language handling with representative tests.
-
-These capabilities are planned work; they are not implemented in this release.
+AFTERMATH has original branding and generated artwork. It is not affiliated with the Terminator franchise. None of the occupational-data publishers endorses its forecast years.
