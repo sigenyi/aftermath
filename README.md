@@ -17,6 +17,12 @@ This is a working browser prototype with original branding and artwork. It is no
 
 There is no live AI service, evidence retrieval, database, account system, or custom-task classifier. Known titles resolve against local aliases. Unfamiliar or hybrid roles ask for their actual tasks; those tasks use a generic scenario until someone maps their requirements.
 
+## Hosting
+
+The public site is deployed from this repository to GitHub Pages: https://sigenyi.github.io/aftermath/
+
+Pushing to `main` runs the syntax checks and model tests, then publishes only `dist/`. The website has no OpenAI runtime, authentication, API, or hosting dependency. The previous Sites configuration has been removed from this checkout; removal of the old hosted project is a separate provider-side operation.
+
 ## Run locally
 
 Requirements: Python 3 to serve the site. Node.js 20 or later is recommended for the checks and tests. No dependency installation or compilation is needed.
@@ -54,7 +60,7 @@ The deployable site is the `dist/` directory, which contains authored static fil
 | `dist/engine.js` | Occupations, task mapping, source metadata, assumptions, and pure report calculations |
 | `dist/assets/` | Original visual assets and favicon |
 | `engine.test.mjs` | Node-based model tests |
-| `.openai/hosting.json` | Sites hosting identity and static-directory configuration |
+| `.github/workflows/pages.yml` | GitHub Pages deployment from the repository |
 
 `resolveRole(input)` returns a title match, a possible match requiring confirmation, or a request for task details. `buildReport({title, tasks, scenario, location})` creates the report without network access. Changing a known task's wording invalidates its original mapping; the edited task receives a generic scenario rather than silently retaining unrelated assumptions.
 
